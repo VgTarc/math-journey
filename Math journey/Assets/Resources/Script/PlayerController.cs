@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 9f; // Jump Speed
     public float maxSpeed = 10f; // Max Walk / Run Speed
     public float jumpPower = 20f; // Jump Power
-    public bool grounded = true; // Check if on the ground
+    public bool grounded; // Check if on the ground
     public float jumpRate = 1f;
     public float nextJumpPress = 0.0f;
     public float fireRate = 0.2f;
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     float inputVertical;
 
     private bool isFacingRight;
+
+    private bool isMoving;
 
 
 
@@ -38,7 +40,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        grounded = true;
+
+        
+
+       
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
@@ -61,13 +66,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)  && Time.time > nextJumpPress && grounded == true)
         {
             nextJumpPress = Time.time * jumpRate;
-            inputHorizontal = 0;
-            rb2D.AddForce(jumpSpeed * (Vector2.up * jumpPower));
+            rb2D.AddForce((Vector2.up * jumpPower));
+            rb2D.velocity = new Vector2(inputHorizontal * speed, inputVertical);
 
-            grounded = false;
-            
+
+
+
         }
 
+        if (grounded == false)
+        {
+            inputHorizontal = 0f;
+        }
     }
 
             
@@ -80,6 +90,21 @@ public class PlayerController : MonoBehaviour
             isFacingRight = !isFacingRight;
         }
 
-  
 
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            grounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                grounded = false;
+            }
+        }
     }
