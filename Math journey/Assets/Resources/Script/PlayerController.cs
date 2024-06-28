@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 9f; // Jump Speed
     public float maxSpeed = 10f; // Max Walk / Run Speed
     public float jumpPower = 20f; // Jump Power
-    public bool grounded; // Check if on the ground
+    public bool grounded = true; // Check if on the ground
     public float jumpRate = 1f;
     public float nextJumpPress = 0.0f;
     public float fireRate = 0.2f;
@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     private Physics2D physic2D;
     Animator animator;
     public int health = 100;
+
+    float inputHorizontal;
+    float inputVertical;
+
+    private bool isFacingRight;
 
 
 
@@ -31,19 +36,50 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        animator.SetBool("Grounded",true); // Set the Grounded variable in animator to be TRUE
+        grounded = true;
+        inputHorizontal = Input.GetAxisRaw("Horizontal");
+        inputVertical = Input.GetAxisRaw("Vertical");
+
+        animator.SetBool("Grounded", true); // Set the Grounded variable in animator to be TRUE
         animator.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal"))); // Set the Speed variable to be the Input Horizontal
-        if (Input.GetAxis("Horizontal") < -0.1f )// if it's below ZERO
+        
+        if (inputHorizontal < 0f && !isFacingRight) // Flip to the left side
         {
-           transform.Translate(Vector2.right * speed * Time.deltaTime);
-           transform.eulerAngles = new Vector2(0,180);
+            Flip();
+            
         }
-        else if(Input.GetAxis("Horizontal") > 0.1f)
+        if (inputHorizontal > 0f && isFacingRight) // Flip to the right side
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-            transform.eulerAngles = new Vector2(0, 0);
+            Flip();   
         }
+        if (inputHorizontal != 0f && inputVertical == 0)
+        {
+            rb2D.velocity = new Vector2(inputHorizontal * speed, inputVertical);
+        }
+        if (Input.GetKeyDown(KeyCode.Space)  && Time.time > nextJumpPress && grounded == true)
+        {
+            nextJumpPress = Time.time * jumpRate;
+            inputHorizontal = 0;
+            rb2D.AddForce(jumpSpeed * (Vector2.up * jumpPower));
+
+            grounded = false;
+            
+        }
+
     }
-}
+
+            
+        void Flip() // Flip Method to use
+        {
+            
+            Vector2 currentScale = transform.localScale;
+            currentScale.x *= -1;
+            gameObject.transform.localScale = currentScale;
+            isFacingRight = !isFacingRight;
+        }
+
+  
+
+    }

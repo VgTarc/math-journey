@@ -587,7 +587,7 @@ MonoBehaviour:
   jumpSpeed: 9
   maxSpeed: 10
   jumpPower: 20
-  grounded: 0
+  grounded: 1
   jumpRate: 1
   nextJumpPress: 0
   fireRate: 0.2
