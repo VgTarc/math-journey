@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6188e41f68dc8c74fba0080d3061c962
+guid: 61d6d35d073c18b43a247aed908738ae
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Adam_withJump_0
+      name: Adam_JumpRemake2_0
       rect:
         serializedVersion: 2
         x: 7
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fadad9f1e1d17ef41acea54e15e66338
-      internalID: 1490320969
+      spriteID: 06115442d37000f46b67b8c4ac6d12e9
+      internalID: -369588343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_1
+      name: Adam_JumpRemake2_1
       rect:
         serializedVersion: 2
         x: 39
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94316ea0812a6ff449081965b5f89b91
-      internalID: -1208785822
+      spriteID: e7f7d3aa8047a4443a0e71baaa15971b
+      internalID: -1930414181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_2
+      name: Adam_JumpRemake2_2
       rect:
         serializedVersion: 2
         x: 71
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcb8f25d790fc9445b4d3c1d6541e4de
-      internalID: 1030207167
+      spriteID: 56966e7f0711e30478b0fa24ca93b9e6
+      internalID: -2030245762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_3
+      name: Adam_JumpRemake2_3
       rect:
         serializedVersion: 2
         x: 103
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0188d8a331a447144966dfb07ddeecdf
-      internalID: 2132212480
+      spriteID: 16cce29354db29344ac1ec40e2645cbb
+      internalID: -1178696302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_4
+      name: Adam_JumpRemake2_4
       rect:
         serializedVersion: 2
         x: 135
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd47d83534d52024aaaa7a21c2db5711
-      internalID: -1210157598
+      spriteID: 7b558459bdcf848448c7a4a65516718a
+      internalID: 956524305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_5
+      name: Adam_JumpRemake2_5
       rect:
         serializedVersion: 2
         x: 168
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16dea3ca94b31564e85a703e93a9f70f
-      internalID: 1137310635
+      spriteID: 676ead9b96ea66f43a07fcf4dc4b3c2a
+      internalID: 2093271589
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_6
+      name: Adam_JumpRemake2_6
       rect:
         serializedVersion: 2
         x: 196
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2f4c52154ca3514cabcc911a1c8462b
-      internalID: -649988369
+      spriteID: cfcc2c970d08ad2419ba0c5184e30698
+      internalID: -1832222703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_7
+      name: Adam_JumpRemake2_7
       rect:
         serializedVersion: 2
         x: 228
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee4d8ebab1cb0084fb77aa70d4c063f8
-      internalID: -1061633325
+      spriteID: fe8012ab519f88948a5c08d640620a35
+      internalID: 1458313882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_8
+      name: Adam_JumpRemake2_8
       rect:
         serializedVersion: 2
         x: 264
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7af3dd78df49b2146be1e685f35127c9
-      internalID: 2136645031
+      spriteID: 3ae128db22a925f4da34fb959cfefa74
+      internalID: 2095988437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_9
+      name: Adam_JumpRemake2_9
       rect:
         serializedVersion: 2
         x: 294
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acf5b41bbb6b4184f90b0ff15ea08f69
-      internalID: 1043799703
+      spriteID: 67cbdf07523061d498627e7c5da79f9d
+      internalID: -1528165685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_10
+      name: Adam_JumpRemake2_10
       rect:
         serializedVersion: 2
         x: 325
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc8ad25a509ccc848ba573da18560339
-      internalID: 734791731
+      spriteID: de7a5e0e63f8da94385b17dc97651497
+      internalID: 694258313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_11
+      name: Adam_JumpRemake2_11
       rect:
         serializedVersion: 2
         x: 357
@@ -355,14 +355,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db06ee2ec3640c54891f8a21a8f085b9
-      internalID: 24744111
+      spriteID: 976c9d305591ea744af2421e5f24a61b
+      internalID: -2034510223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_12
+      name: Adam_JumpRemake2_12
       rect:
         serializedVersion: 2
         x: 390
@@ -376,38 +376,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d6f477f9e3650941b372b98274d0425
-      internalID: -826398499
+      spriteID: 68222dda22aa81e4db98ce6055577506
+      internalID: -892106600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_13
+      name: Adam_JumpRemake2_13
       rect:
         serializedVersion: 2
         x: 424
-        y: 0
-        width: 21
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c130a30767cfae84cbc7137990626bdb
-      internalID: 1361620255
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Adam_withJump_14
-      rect:
-        serializedVersion: 2
-        x: 456
         y: 0
         width: 18
         height: 32
@@ -418,17 +397,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70d2409c9e3edcb47823867087b6fa7d
-      internalID: -1652245423
+      spriteID: 06a0f4d054046434a86cdfa60a6b225f
+      internalID: -147738033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_15
+      name: Adam_JumpRemake2_14
       rect:
         serializedVersion: 2
-        x: 483
+        x: 451
         y: 0
         width: 21
         height: 32
@@ -439,14 +418,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11724d00cfeccd541ad42bb04599a7ec
-      internalID: 1888582344
+      spriteID: 102cbd6a64bf04d4681c077fe739594b
+      internalID: -1355627701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_16
+      name: Adam_JumpRemake2_15
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 0
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f81cd6af067dc294d82bb263020235e5
+      internalID: 1062505954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adam_JumpRemake2_16
       rect:
         serializedVersion: 2
         x: 516
@@ -460,38 +460,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47ef96c86c0de5741a8b752fd19d3854
-      internalID: -1730502718
+      spriteID: 8b72365ba08a1a341a2e9e91172cf2f5
+      internalID: -1275018498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Adam_withJump_17
+      name: Adam_JumpRemake2_17
       rect:
         serializedVersion: 2
         x: 548
-        y: 0
-        width: 26
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ddde415983716a94587b926bb5f30345
-      internalID: 1410585267
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Adam_withJump_18
-      rect:
-        serializedVersion: 2
-        x: 580
         y: 0
         width: 25
         height: 32
@@ -502,8 +481,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c89d35d070b2f3f4daf370a9779fc913
-      internalID: -1975031619
+      spriteID: cff70181d247b8e4c802972586849fe4
+      internalID: -311279867
       vertices: []
       indices: 
       edges: []
@@ -519,25 +498,24 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Adam_withJump_0: 1490320969
-      Adam_withJump_1: -1208785822
-      Adam_withJump_10: 734791731
-      Adam_withJump_11: 24744111
-      Adam_withJump_12: -826398499
-      Adam_withJump_13: 1361620255
-      Adam_withJump_14: -1652245423
-      Adam_withJump_15: 1888582344
-      Adam_withJump_16: -1730502718
-      Adam_withJump_17: 1410585267
-      Adam_withJump_18: -1975031619
-      Adam_withJump_2: 1030207167
-      Adam_withJump_3: 2132212480
-      Adam_withJump_4: -1210157598
-      Adam_withJump_5: 1137310635
-      Adam_withJump_6: -649988369
-      Adam_withJump_7: -1061633325
-      Adam_withJump_8: 2136645031
-      Adam_withJump_9: 1043799703
+      Adam_JumpRemake2_0: -369588343
+      Adam_JumpRemake2_1: -1930414181
+      Adam_JumpRemake2_10: 694258313
+      Adam_JumpRemake2_11: -2034510223
+      Adam_JumpRemake2_12: -892106600
+      Adam_JumpRemake2_13: -147738033
+      Adam_JumpRemake2_14: -1355627701
+      Adam_JumpRemake2_15: 1062505954
+      Adam_JumpRemake2_16: -1275018498
+      Adam_JumpRemake2_17: -311279867
+      Adam_JumpRemake2_2: -2030245762
+      Adam_JumpRemake2_3: -1178696302
+      Adam_JumpRemake2_4: 956524305
+      Adam_JumpRemake2_5: 2093271589
+      Adam_JumpRemake2_6: -1832222703
+      Adam_JumpRemake2_7: 1458313882
+      Adam_JumpRemake2_8: 2095988437
+      Adam_JumpRemake2_9: -1528165685
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

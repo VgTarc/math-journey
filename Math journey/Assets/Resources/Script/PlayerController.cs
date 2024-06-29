@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         // Walk system
         if (inputHorizontal != 0)
         {
-            rb2D.velocity = new Vector2(inputHorizontal, rb2D.velocity.y);
+            rb2D.velocity = new Vector2(inputHorizontal * speed, rb2D.velocity.y);
         }
 
         if (inputHorizontal < -0f && !isFacingRight) // Flip to the right side
