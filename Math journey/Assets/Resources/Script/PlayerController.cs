@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -24,7 +25,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight;
 
-    private bool isMoving;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    
+
 
 
 
@@ -38,57 +42,63 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
-        
 
-       
+
+
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
         animator.SetBool("Grounded", true); // Set the Grounded variable in animator to be TRUE
-        animator.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal"))); // Set the Speed variable to be the Input Horizontal
-        
-        if (inputHorizontal < 0f && !isFacingRight) // Flip to the left side
+        animator.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal"))); // Set the Speed variable in animator to be the Input Horizontal
+
+        // Walk system
+        if (inputHorizontal != 0)
+        {
+            rb2D.velocity = new Vector2(inputHorizontal, rb2D.velocity.y);
+        }
+
+        if (inputHorizontal < -0f && !isFacingRight) // Flip to the right side
         {
             Flip();
-            
+
         }
-        if (inputHorizontal > 0f && isFacingRight) // Flip to the right side
+        
+        if (inputHorizontal > 0f && isFacingRight) // Flip to the left side
         {
-            Flip();   
+
+            Flip();
+
         }
-        if (inputHorizontal != 0f && inputVertical == 0)
+
+        //----------------------------------------------------------------------------------------------
+        // Jump system
+        if (Input.GetKeyDown(KeyCode.Space)&& isGrounded())
         {
-            rb2D.velocity = new Vector2(inputHorizontal * speed, inputVertical);
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower);
         }
-        if (Input.GetKeyDown(KeyCode.Space)  && Time.time > nextJumpPress && grounded == true)
+
+        bool isGrounded()
         {
-            nextJumpPress = Time.time * jumpRate;
-            rb2D.AddForce((Vector2.up * jumpPower));
-            rb2D.velocity = new Vector2(inputHorizontal * speed, inputVertical);
-
-
-
-
+            return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.0093f, 0.18f), CapsuleDirection2D.Vertical, 0, groundLayer);
         }
+    
+        //-------------------------------
 
-        if (grounded == false)
-        {
-            inputHorizontal = 0f;
-        }
     }
 
-            
-        void Flip() // Flip Method to use
-        {
-            
-            Vector2 currentScale = transform.localScale;
-            currentScale.x *= -1;
-            gameObject.transform.localScale = currentScale;
-            isFacingRight = !isFacingRight;
-        }
+
+    void Flip() // Flip Method to use
+    {
+
+        Vector2 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+        isFacingRight = !isFacingRight;
+    }
+
 
 
 
@@ -108,3 +118,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+   
