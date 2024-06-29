@@ -77,7 +77,12 @@ public class PlayerController : MonoBehaviour
         // Jump system
         if (Input.GetKeyDown(KeyCode.Space)&& isGrounded())
         {
+            animator.SetBool("Jump", true);
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
         }
 
         bool isGrounded()
