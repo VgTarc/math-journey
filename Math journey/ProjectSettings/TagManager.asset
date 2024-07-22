@@ -42,11 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Mountains
+  - name: 1FarForest
     uniqueID: 11613907
     locked: 0
-  - name: Grass
+  - name: 2BigTrees
     uniqueID: 1354676199
+    locked: 0
+  - name: 3SmallTrees
+    uniqueID: 2840611583
+    locked: 0
+  - name: 4RockandBrush
+    uniqueID: 3092808877
     locked: 0
   - name: Player
     uniqueID: 2215127311
