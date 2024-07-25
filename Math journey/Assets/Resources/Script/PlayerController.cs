@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2D;
     private Physics2D physic2D;
     Animator animator;
-    public int health = 100;
+    public int maxHealth = 100;
+    public int health;
+    public int currentHp;
 
     float inputHorizontal;
     float inputVertical;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         rb2D = GetComponent<Rigidbody2D>(); // get therigidbody2D to use
         animator = GetComponent<Animator>(); // get the Animator to use
     }
@@ -122,5 +125,17 @@ public class PlayerController : MonoBehaviour
                 grounded = false;
             }
         }
+
+    public void TakeDamage(int damage)
+    {
+        
+        health -= damage;
+        currentHp = health;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
+
+   }
    
