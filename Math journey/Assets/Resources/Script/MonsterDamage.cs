@@ -11,19 +11,21 @@ public class Slime_Damage : MonoBehaviour
 
 
 
-    public GameObject parent;
   
     
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         if (collision.gameObject.tag == "Player")
         {
             playerHealth.TakeDamage(damage);
         }
+        
 
-       
+
+
+
     }
         
 }
