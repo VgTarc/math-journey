@@ -7,7 +7,8 @@ public class Slime_Damage : MonoBehaviour
 {
 
     public int damage;
-    public PlayerController playerHealth;
+    public PlayerController playerController;
+    
 
 
 
@@ -19,7 +20,16 @@ public class Slime_Damage : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            playerHealth.TakeDamage(damage);
+            playerController.KBCounter = playerController.KBTotalTime;
+            if(collision.transform.position.x <= transform.position.x)
+            {
+                playerController.KnockFromRight = true;
+            }
+            if (collision.transform.position.x > transform.position.x)
+            {
+                playerController.KnockFromRight = false;
+            }
+            playerController.TakeDamage(damage);
         }
         
 

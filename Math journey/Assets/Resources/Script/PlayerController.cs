@@ -20,7 +20,16 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     public int maxHealth = 100;
     public int health;
-    public int currentHp;
+    
+
+    public float KBForce;
+    public float KBCounter;
+    public float KBTotalTime;
+    public bool KnockFromRight;
+
+
+
+
 
     float inputHorizontal;
     float inputVertical;
@@ -49,8 +58,6 @@ public class PlayerController : MonoBehaviour
     {
 
 
-
-
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
@@ -58,9 +65,25 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal"))); // Set the Speed variable in animator to be the Input Horizontal
 
         // Walk system
-        if (inputHorizontal != 0)
+
+        if (KBCounter <= 0)
         {
-            rb2D.velocity = new Vector2(inputHorizontal * speed, rb2D.velocity.y);
+            if (inputHorizontal != 0)
+            {
+                rb2D.velocity = new Vector2(inputHorizontal * speed, rb2D.velocity.y);
+            }
+        }
+        else
+        {
+            if(KnockFromRight == true)
+            {
+                rb2D.velocity = new Vector2(-KBForce, KBForce);
+            }
+            if(KnockFromRight == false)
+            {
+                rb2D.velocity = new Vector2(KBForce, KBForce);
+            }
+            KBCounter -= Time.deltaTime;
         }
 
         if (inputHorizontal < -0f && !isFacingRight) // Flip to the right side
@@ -130,7 +153,6 @@ public class PlayerController : MonoBehaviour
     {
         
         health -= damage;
-        currentHp = health;
         if (health <= 0)
         {
             Destroy(gameObject);
