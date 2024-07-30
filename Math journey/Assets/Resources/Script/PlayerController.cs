@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     public int maxHealth = 100;
     public int health;
+    public Slider slider;
     
 
     public float KBForce;
@@ -51,6 +53,8 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         rb2D = GetComponent<Rigidbody2D>(); // get therigidbody2D to use
         animator = GetComponent<Animator>(); // get the Animator to use
+        slider.maxValue = maxHealth;
+        slider.value = health;
     }
 
     // Update is called once per frame
@@ -153,6 +157,7 @@ public class PlayerController : MonoBehaviour
     {
         
         health -= damage;
+        slider.value = health;
         if (health <= 0)
         {
             Destroy(gameObject);
