@@ -66,6 +66,9 @@ TagManager:
   - name: Floor
     uniqueID: 2655154615
     locked: 0
+  - name: Item
+    uniqueID: 3345128025
+    locked: 0
   - name: Tutorials
     uniqueID: 2011900623
     locked: 0
