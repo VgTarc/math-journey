@@ -460,13 +460,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64217770}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.544013, y: -0.052082792, z: -0.041947175}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -718.8525, y: -440.27057, z: -4.81965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 700105229}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2042401495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &64217774
 MonoBehaviour:
@@ -3628,6 +3628,10 @@ PrefabInstance:
       value: ItemSlot (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5826261266055965404, guid: b814f471e6423654eb5977a91ba6f35d, type: 3}
+      propertyPath: emptySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fe057cdffc90aad4187009c3a722293c, type: 3}
+    - target: {fileID: 5826261266055965404, guid: b814f471e6423654eb5977a91ba6f35d, type: 3}
       propertyPath: ItemDescriptionText
       value: 
       objectReference: {fileID: 229136557}
@@ -4794,6 +4798,8 @@ MonoBehaviour:
   - {fileID: 204422771}
   - {fileID: 41045730}
   - {fileID: 1569964709}
+  itemSOs:
+  - {fileID: 11400000, guid: 0c6784df58409924cb0e3feaa6c6bba8, type: 2}
 --- !u!114 &1459260485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26438,6 +26444,7 @@ Transform:
   m_Children:
   - {fileID: 1459260483}
   - {fileID: 1291968243}
+  - {fileID: 64217773}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2060518359
@@ -27158,4 +27165,3 @@ SceneRoots:
   - {fileID: 2031447867}
   - {fileID: 1148387437}
   - {fileID: 2042401495}
-  - {fileID: 64217773}

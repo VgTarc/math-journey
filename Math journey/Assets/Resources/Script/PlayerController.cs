@@ -164,5 +164,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   }
+    public void RestoreHealth(int amount)
+    {
+        health += amount;
+        slider.value = health;
+    }
+
+}
    

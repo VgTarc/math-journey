@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
@@ -13,7 +14,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public int quantity;
     public Sprite itemSprite;
     public bool isFull;
-    public string itemDescripttion;
+    public string itemDescription;
     public Sprite emptySprite;
 
     [SerializeField]
@@ -61,7 +62,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         itemImage.sprite = itemSprite;
 
         // Update Description
-        this.itemDescripttion = itemDescription;
+        this.itemDescription = itemDescription;
 
         // Update quantity
         this.quantity += quantity;
@@ -105,16 +106,54 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnLeftClick()
     {
-        inventoryManager.DeselectAllSlots();
-        selectedShader.SetActive(true);
-        thisItemSelected = true;
-        ItemDescriptionNameText.text = itemName;
-        ItemDescriptionText.text = itemDescripttion;
-        itemDescriptionImage.sprite = itemSprite;
-        if(itemDescriptionImage.sprite == null) 
+        if (thisItemSelected)
         {
-            itemDescriptionImage.sprite = emptySprite;
+            bool usable = inventoryManager.UseItem(itemName);
+            if (usable == true)
+            {
+                    this.quantity -= 1;
+                    quantityText.text = this.quantity.ToString();
+                    isFull = false;
+
+                if (this.quantity <= 0)
+                {
+                    EmptySlot();
+                }
+            }
+
+            
+            
+
         }
+
+        else
+        {
+            inventoryManager.DeselectAllSlots();
+            selectedShader.SetActive(true);
+            thisItemSelected = true;
+            ItemDescriptionNameText.text = itemName;
+            ItemDescriptionText.text = itemDescription;
+            itemDescriptionImage.sprite = itemSprite;
+            if (itemDescriptionImage.sprite == null)
+            {
+                itemDescriptionImage.sprite = emptySprite;
+            }
+        }
+        
+    }
+
+    private void EmptySlot()
+    {
+        quantityText.enabled = false;
+        itemImage.sprite = emptySprite;
+        itemName = "";
+        itemDescription = "";
+        itemSprite = emptySprite;
+
+        ItemDescriptionNameText.text = "";
+        ItemDescriptionText.text = "";
+        itemDescriptionImage.sprite = emptySprite;
+        isFull = false;
     }
 
     public void OnRightClick()
