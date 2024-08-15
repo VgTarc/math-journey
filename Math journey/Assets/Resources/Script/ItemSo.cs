@@ -5,8 +5,11 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ItemSo : ScriptableObject
 {
+    public string Name;
     public string itemName;
-    public PlayerController playerController;
+    
+    
+    
 
     public StatToChange statToChange = new StatToChange();
     public int amountToChangeStat;
@@ -14,9 +17,15 @@ public class ItemSo : ScriptableObject
     public AttributeToChange attributeToChange = new AttributeToChange();
     public int amountToChangeAttribute;
 
+
+    public OpenCanva openCanva = new OpenCanva();
+    public bool alreadyOpen;
+
+   
+
     public bool UseItem()
     {
-        if(statToChange == StatToChange.health)
+        if(statToChange == StatToChange.health) // Heal
         {
             PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
             
@@ -31,9 +40,35 @@ public class ItemSo : ScriptableObject
             }
             
         }
-        return false;
 
+
+        if (openCanva == OpenCanva.Book)
+        {
+
+            OpenCanvas openCanvas = GameObject.Find(Name).GetComponent<OpenCanvas>();
+
+            if(alreadyOpen == false)
+            {
+                openCanvas.OpenCanva(alreadyOpen);
+                alreadyOpen = true;
+                return true;
+            }
+
+            else if(alreadyOpen == true)
+            {
+                openCanvas.OpenCanva(alreadyOpen);
+                alreadyOpen = false;
+                return false;
+            }
+           
+            
+            
+        }
+
+
+            return false;
     }
+
 
 
 
@@ -45,9 +80,15 @@ public class ItemSo : ScriptableObject
 
     public enum AttributeToChange
     {
+        none,
         speed
     };
 
+   public enum OpenCanva
+    {
+        none,
+        Book
+    }
 
 
 }

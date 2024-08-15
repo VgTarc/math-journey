@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
 
     public GameObject inventoryMenu;
-    private bool menuActivated;
+    public bool menuActivated;
     public ItemSlot[] itemSlot;
 
     public ItemSo[] itemSOs; // item SO array
@@ -59,25 +59,46 @@ public class InventoryManager : MonoBehaviour
 
     public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
-        for (int i = 0; i < itemSlot.Length; i++ )
+        
+        for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (itemSlot[i].isFull == false && itemSlot[i].itemName == name || itemSlot[i].quantity == 0)
+            if (itemSlot[i].itemName == itemName && itemSlot[i].quantity < itemSlot[i].maxNumberOfItems)
             {
-                int leftOverItem = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
-                if(leftOverItem > 0)
+                int leftoverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
+
+                if (leftoverItems > 0)
                 {
-
-                    leftOverItem = AddItem(itemName, leftOverItem, itemSprite, itemDescription);
-                    
+                    quantity = leftoverItems;
                 }
-                return leftOverItem;
-
+                else
+                {
+                    return 0;
+                }
             }
         }
+
+        
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (!itemSlot[i].isFull)
+            {
+                int leftoverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
+
+                if (leftoverItems > 0)
+                {
+                    quantity = leftoverItems;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
         return quantity;
     }
 
-    public void DeselectAllSlots()
+        public void DeselectAllSlots()
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {

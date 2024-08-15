@@ -5,9 +5,19 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
+
+
+
+    //======== Others =================//
+    private ItemSo itemSo;
+    private OpenCanvas openCanvas;
+
+
+
 
     //======== ITEM DATA ==============//
     public string itemName;
@@ -18,7 +28,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public Sprite emptySprite;
 
     [SerializeField]
-    private int maxNumberOfItems;
+    public int maxNumberOfItems;
 
 
     //======== ITEM SLOT ============//
@@ -111,14 +121,24 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             bool usable = inventoryManager.UseItem(itemName);
             if (usable == true)
             {
-                    this.quantity -= 1;
-                    quantityText.text = this.quantity.ToString();
-                    isFull = false;
+                    if(itemSo.openCanva == ItemSo.OpenCanva.Book)
+                    {
+                        quantityText.text = this.quantity.ToString();
+                    }
+                    else
+                    {
+                        this.quantity -= 1;
+                        quantityText.text = this.quantity.ToString();
+                        isFull = false;
+                    }
+                    
 
                 if (this.quantity <= 0)
                 {
-                    EmptySlot();
+                        EmptySlot(); 
                 }
+
+                
             }
 
             
@@ -158,7 +178,52 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnRightClick()
     {
-        
-    }
+        if(quantity > 0)
+        {
+            // Create a new item
+            GameObject itemToDrop = new GameObject(itemName);
+            Item newItem = itemToDrop.AddComponent<Item>();
+            newItem.quantity = 1;
+            newItem.itemName = itemName;
+            newItem.sprite = itemSprite;
+            newItem.itemDescription = itemDescription;
 
+
+            // Create and modify the sprite renderer
+            SpriteRenderer spriteRenderer = itemToDrop.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = itemSprite;
+            spriteRenderer.sortingOrder = 1;
+            spriteRenderer.sortingLayerName = "Item";
+
+            // Add a collider
+            itemToDrop.AddComponent<BoxCollider2D>();
+
+            // Set the location
+            
+            if(GameObject.FindWithTag("Player").transform.localScale.x > 0)
+            {
+                 itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(0.5f, 0.5f, 0);
+            }
+            else if(GameObject.FindWithTag("Player").transform.localScale.x < 0)
+            {
+                itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(-0.5f, 0.5f, 0);
+            }
+
+            // Add physics
+            itemToDrop.AddComponent<Rigidbody2D>();
+
+            // Subtract the item
+            this.quantity -= 1;
+            quantityText.text = this.quantity.ToString();
+            isFull = false;
+
+            if (this.quantity <= 0)
+            {
+                EmptySlot();
+            }
+        }
+    }
 }
+
+
+           
