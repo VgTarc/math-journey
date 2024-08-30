@@ -121,30 +121,30 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             bool usable = inventoryManager.UseItem(itemName);
             if (usable == true)
             {
-                    if(itemSo.openCanva == ItemSo.OpenCanva.Book)
-                    {
-                        quantityText.text = this.quantity.ToString();
-                    }
-                    else
-                    {
-                        this.quantity -= 1;
-                        quantityText.text = this.quantity.ToString();
-                        isFull = false;
-                    }
-                    
+                if (itemSo.openCanva == ItemSo.OpenCanva.Book)
+                {
+                    quantityText.text = this.quantity.ToString();
+                }
+                else
+                {
+                    this.quantity -= 1;
+                    quantityText.text = this.quantity.ToString();
+                    isFull = false;
+                }
+
 
                 if (this.quantity <= 0)
                 {
-                        EmptySlot(); 
+                    EmptySlot();
                 }
 
                 
             }
 
-            
-            
 
         }
+
+        
 
         else
         {

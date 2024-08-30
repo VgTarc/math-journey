@@ -49,16 +49,14 @@ public class ItemSo : ScriptableObject
 
             if(alreadyOpen == false)
             {
-                openCanvas.OpenCanva(alreadyOpen);
+                openCanvas.OpenCanva(alreadyOpen); // false
                 alreadyOpen = true;
-                return true;
             }
 
             else if(alreadyOpen == true)
             {
-                openCanvas.OpenCanva(alreadyOpen);
+                openCanvas.OpenCanva(alreadyOpen); // true
                 alreadyOpen = false;
-                return false;
             }
            
             

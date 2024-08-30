@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e026931c066fb94fadefef80342ab8d, type: 3}
+  m_Name: UnionDoor1
+  m_EditorClassIdentifier: 
+  question: "A = {7 , 9 , 0) M = {7 , 8 , 9}  A U M = {7 , 9 , 0} \u0E08\u0E23\u0E34\u0E07\u0E2B\u0E23\u0E37\u0E2D\u0E44\u0E21\u0E48"
+  answers:
+  - "\u0E44\u0E21\u0E48\u0E08\u0E23\u0E34\u0E07"
+  - "\u0E08\u0E23\u0E34\u0E07"
