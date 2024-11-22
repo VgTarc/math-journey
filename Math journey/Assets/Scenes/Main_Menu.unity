@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 87929583}
   - component: {fileID: 87929582}
   - component: {fileID: 87929581}
+  - component: {fileID: 87929584}
   m_Layer: 7
   m_Name: LeafParticle
   m_TagString: Untagged
@@ -5175,6 +5176,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &87929584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87929580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fa048b8ac706446b3159fc2f05dec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
 --- !u!1 &154065878
 GameObject:
   m_ObjectHideFlags: 0
