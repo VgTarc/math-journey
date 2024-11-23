@@ -8,6 +8,7 @@ public class OpenCanvas : MonoBehaviour
 
     public GameObject Canvas;
     public GameObject InventoryMenu;
+    public GameObject player;
     private InventoryManager InventoryManager;
     private ItemSo itemSo;
 
@@ -16,14 +17,16 @@ public class OpenCanvas : MonoBehaviour
         if(alreadyOpen == false)
         {
             Canvas.SetActive(true);
+            
             InventoryMenu.SetActive(false);
             
-            
+
             return false;
         }
 
         else if(alreadyOpen == true)
         {
+            
             Canvas.SetActive(false);
             
 

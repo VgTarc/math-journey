@@ -21,11 +21,10 @@ public class OpenDoorCanvas : MonoBehaviour
             if (alreadyOpen == false)
             {
                 Canvas.SetActive(true);
+
                 InventoryMenu.SetActive(false);
 
                 alreadyOpen = true;
-
-
 
             }
 
