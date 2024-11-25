@@ -40,11 +40,12 @@ public class PlayerController : MonoBehaviour
 
     public Transform groundCheck;
     public LayerMask groundLayer;
-    
 
+    public Coins coinScript;
 
+    [Header("Coins")]
 
-
+    public int Coin = 0;
 
 
     // Start is called before the first frame update
@@ -143,6 +144,11 @@ public class PlayerController : MonoBehaviour
         {
             grounded = true;
         }
+        else if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            GetCoin(1);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -169,6 +175,17 @@ public class PlayerController : MonoBehaviour
         health += amount;
         slider.value = health;
     }
+
+    public void GetCoin(int amount)
+    {
+        GameObject coin = GameObject.Find("CoinCanvas");
+        coinScript = coin.GetComponent<Coins>();
+        Coin += amount;
+        coinScript.UpdateCoinCount(Coin);
+    }
+
+   
+    
 
 }
    

@@ -8,6 +8,7 @@ TagManager:
   - WeakPoint
   - Feet
   - Enemy
+  - Coin
   layers:
   - Default
   - TransparentFX

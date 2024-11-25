@@ -32,6 +32,7 @@ public class Slime_Damage : MonoBehaviour
             playerController.TakeDamage(damage);
         }
         
+        
 
 
 
