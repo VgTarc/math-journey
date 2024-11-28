@@ -8,6 +8,7 @@ public class MonsterHp : MonoBehaviour
     public PlayerController playerController;
     public GameObject gameObject1;
 
+    public GameObject fadeTextObject;
  
 
     public int amount;
@@ -24,10 +25,24 @@ public class MonsterHp : MonoBehaviour
         if (monsterHp <= 0)
         {
             playerController.GetCoin(amount);
+            OnDeath();
             Destroy(gameObject);
             
         }
     }
+
+    private void OnDeath()
+    {
+        if(fadeTextObject != null)
+        {
+            FadeText fadeText = fadeTextObject.GetComponent<FadeText>();
+            if(fadeText != null )
+            {
+                StartCoroutine(fadeText.FadeInOut());
+            }
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
