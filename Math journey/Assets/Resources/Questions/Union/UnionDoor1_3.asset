@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e026931c066fb94fadefef80342ab8d, type: 3}
   m_Name: UnionDoor1_3
   m_EditorClassIdentifier: 
-  question: cmaockma
+  question: Test1
   answers:
-  - "Yes (\u0E16\u0E39\u0E01)"
-  - "No go away (\u0E1C\u0E34\u0E14)"
+  - "\u0E04\u0E33\u0E15\u0E2D\u0E1A\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01"
+  - "\u0E04\u0E33\u0E15\u0E2D\u0E1A\u0E17\u0E35\u0E48\u0E1C\u0E34\u0E14(\u0E40\u0E25\u0E37\u0E2D\u0E14\u0E08\u0E30\u0E25\u0E14)"
