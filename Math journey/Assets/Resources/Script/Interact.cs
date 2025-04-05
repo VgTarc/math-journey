@@ -8,6 +8,14 @@ public class Interact : MonoBehaviour
     public bool isInRange;
     public GameObject Freeze;
     public UnityEvent interactAction;
+    
+    OpenDoorCanvas OpenDoorCanvas;
+
+    private void Start()
+    {
+        OpenDoorCanvas = GetComponentInParent<OpenDoorCanvas>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -18,9 +26,17 @@ public class Interact : MonoBehaviour
             {
                 
                 interactAction.Invoke(); // fire event
-                
+                if (OpenDoorCanvas.alreadyOpen == true)
+                {
+                    OpenDoorCanvas.alreadyOpen = false;
+                }
                 Debug.Log("Event fire");
             }
+        }
+        else
+        {
+            OpenDoorCanvas.Canvas.SetActive(false);
+            OpenDoorCanvas.alreadyOpen = false;
         }
     }
 
