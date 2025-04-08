@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CutsceneHandler : MonoBehaviour
 {
+    public Camera Cam;
+    public CinemachineVirtualCamera vCam;
+
     private CutsceneElementBase[] cutsceneElements;
     private int index = -1;
+
     public void Start()
     {
         cutsceneElements = GetComponents<CutsceneElementBase>();
@@ -17,6 +22,7 @@ public class CutsceneHandler : MonoBehaviour
         {
             cutsceneElements[index].Execute();
         }
+
     }
 
     public void PlayNextElement()

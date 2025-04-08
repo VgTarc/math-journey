@@ -5,7 +5,7 @@ using UnityEngine;
 public class CutsceneElementBase : MonoBehaviour
 {
     public float duration;
-    private CutsceneHandler cutsceneHandler;
+    public CutsceneHandler cutsceneHandler { get; private set; } // สคริปอื่นเอาไปใช้ได้ แต่จะไม่เห็นใน inspector
 
     public void Start()
     {
