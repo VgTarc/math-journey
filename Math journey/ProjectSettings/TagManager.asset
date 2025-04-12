@@ -9,6 +9,7 @@ TagManager:
   - Feet
   - Enemy
   - Coin
+  - OptionButton
   layers:
   - Default
   - TransparentFX

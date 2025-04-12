@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Coins : MonoBehaviour
+public class Coins : MonoBehaviour , IDataPersistence
 {
     [Header("Coins")]
     public int Coin; 
 
     [Header("PlayerScript")]
-    private PlayerController playerController;
+    private PlayerCoins playerCoins;
 
     [Header("CoinText")]
     public TextMeshProUGUI coinText;
@@ -23,14 +23,14 @@ public class Coins : MonoBehaviour
             return;
         }
 
-        playerController = playerObj.GetComponent<PlayerController>();
-        if (playerController == null)
+        playerCoins = playerObj.GetComponent<PlayerCoins>();
+        if (playerCoins == null)
         {
-            Debug.LogError("PlayerController component not found on Player GameObject.");
+            Debug.LogError("playerCoins component not found on Player GameObject.");
             return;
         }
 
-        Coin = playerController.Coin;
+        Coin = playerCoins.Coin;
         UpdateCoinUI();
 
         if (coinText == null)
@@ -42,9 +42,9 @@ public class Coins : MonoBehaviour
     void Update()
     {
        
-        if (Coin != playerController.Coin) 
+        if (Coin != playerCoins.Coin) 
         {
-            Coin = playerController.Coin; 
+            Coin = playerCoins.Coin; 
             UpdateCoinUI(); 
         }
     }
@@ -60,4 +60,16 @@ public class Coins : MonoBehaviour
         Coin = newCoinValue; 
         UpdateCoinUI(); 
     }
+
+    //========================== SAVE AND LOAD ==========================================//
+    public void LoadData(GameData data)
+    {
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+
+    }
+    //========================== SAVE AND LOAD ==========================================//
 }

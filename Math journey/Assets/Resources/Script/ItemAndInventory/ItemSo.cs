@@ -27,15 +27,15 @@ public class ItemSo : ScriptableObject
     {
         if(statToChange == StatToChange.health) // Heal
         {
-            PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+            PlayerHealth playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
             
-            if(playerController.health == playerController.maxHealth)
+            if(playerHealth.health == playerHealth.maxHealth)
             {
                 return false;
             }
             else
             {
-                playerController.RestoreHealth(amountToChangeStat);
+                playerHealth.RestoreHealth(amountToChangeStat);
                 return true;
             }
             

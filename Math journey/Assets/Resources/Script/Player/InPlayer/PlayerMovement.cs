@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour , IDataPersistence
 {
-
     public float speed = 1f; // Walk / Run Speed
     public float jumpSpeed = 9f; // Jump Speed
     public float maxSpeed = 10f; // Max Walk / Run Speed
-    public float jumpPower = 20f; // Jump Power
+    public float jumpPower = 3f; // Jump Power
     public bool grounded; // Check if on the ground
     public float jumpRate = 1f;
     public float nextJumpPress = 0.0f;
@@ -19,19 +19,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2D;
     private Physics2D physic2D;
     Animator animator;
-    public int maxHealth = 100;
-    public int health;
-    public Slider slider;
-    
 
     public float KBForce;
     public float KBCounter;
     public float KBTotalTime;
     public bool KnockFromRight;
-
-
-
-
 
     float inputHorizontal;
     float inputVertical;
@@ -41,27 +33,16 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
 
-    public Coins coinScript;
-
-    [Header("Coins")]
-
-    public int Coin = 0;
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
         rb2D = GetComponent<Rigidbody2D>(); // get therigidbody2D to use
         animator = GetComponent<Animator>(); // get the Animator to use
-        slider.maxValue = maxHealth;
-        slider.value = health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        slider.value = health;
+        
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
@@ -80,11 +61,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if(KnockFromRight == true)
+            if (KnockFromRight == true)
             {
                 rb2D.velocity = new Vector2(-KBForce, KBForce);
             }
-            if(KnockFromRight == false)
+            if (KnockFromRight == false)
             {
                 rb2D.velocity = new Vector2(KBForce, KBForce);
             }
@@ -96,7 +77,7 @@ public class PlayerController : MonoBehaviour
             Flip();
 
         }
-        
+
         if (inputHorizontal > 0f && isFacingRight) // Flip to the left side
         {
 
@@ -106,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
         //----------------------------------------------------------------------------------------------
         // Jump system
-        if (Input.GetKeyDown(KeyCode.Space)&& isGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             animator.SetBool("Jump", true);
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower);
@@ -120,11 +101,10 @@ public class PlayerController : MonoBehaviour
         {
             return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.0093f, 0.18f), CapsuleDirection2D.Vertical, 0, groundLayer);
         }
-    
+
         //-------------------------------
 
     }
-
 
     void Flip() // Flip Method to use
     {
@@ -135,57 +115,30 @@ public class PlayerController : MonoBehaviour
         isFacingRight = !isFacingRight;
     }
 
-
-
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             grounded = true;
         }
-        else if (other.gameObject.CompareTag("Coin"))
-        {
-            Destroy(other.gameObject);
-            GetCoin(1);
-        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
-        {
-            if (other.gameObject.CompareTag("Ground"))
-            {
-                grounded = false;
-            }
-        }
-
-    public void TakeDamage(int damage)
     {
-        
-        health -= damage;
-        slider.value = health;
-        if (health <= 0)
+        if (other.gameObject.CompareTag("Ground"))
         {
-            Destroy(gameObject);
+            grounded = false;
         }
     }
 
-    public void RestoreHealth(int amount)
+    public void LoadData(GameData data)
     {
-        health += amount;
-        slider.value = health;
+        this.transform.position = data.playerPositon;
     }
 
-    public void GetCoin(int amount)
+    public void SaveData(ref GameData data)
     {
-        GameObject coin = GameObject.Find("CoinCanvas");
-        coinScript = coin.GetComponent<Coins>();
-        Coin += amount;
-        coinScript.UpdateCoinCount(Coin);
+        data.playerPositon = this.transform.position;
     }
-
-   
-    
 
 }
-   

@@ -5,7 +5,8 @@ using UnityEngine;
 public class MonsterHp : MonoBehaviour
 {
     public int monsterHp;
-    public PlayerController playerController;
+    public PlayerHealth playerHealth;
+    public PlayerCoins playerCoins;
     public GameObject gameObject1;
 
     public GameObject fadeTextObject;
@@ -16,7 +17,8 @@ public class MonsterHp : MonoBehaviour
     private void Start()
     {
         GameObject playerobj = GameObject.Find("Player");
-        playerController = playerobj.GetComponent<PlayerController>();
+        playerHealth = playerobj.GetComponent<PlayerHealth>();
+        playerCoins = playerobj.GetComponent<PlayerCoins>();
     }
 
     public void TakeDamage(int damage)
@@ -24,7 +26,7 @@ public class MonsterHp : MonoBehaviour
         monsterHp -= damage;
         if (monsterHp <= 0)
         {
-            playerController.GetCoin(amount);
+            playerCoins.GetCoin(amount);
             OnDeath();
             Destroy(gameObject);
             

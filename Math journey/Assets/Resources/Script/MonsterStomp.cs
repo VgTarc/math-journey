@@ -17,16 +17,16 @@ public class MonsterStomp : MonoBehaviour
         {
 
             MonsterHp monsterHp = collision.gameObject.GetComponent<MonsterHp>();
-            PlayerController playerController = gameObject1.GetComponent<PlayerController>();
+            PlayerMovement playerMovement = gameObject1.GetComponent<PlayerMovement>();
 
-            playerController.KBCounter = playerController.KBTotalTime;
+            playerMovement.KBCounter = playerMovement.KBTotalTime;
             if (collision.transform.position.x == transform.position.x)
             {
-                playerController.KnockFromRight = true;
+                playerMovement.KnockFromRight = true;
             }
             if (collision.transform.position.x > transform.position.x)
             {
-                playerController.KnockFromRight = false;
+                playerMovement.KnockFromRight = false;
             }
             monsterHp.TakeDamage(damage);
 

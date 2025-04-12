@@ -47,8 +47,8 @@ public class AnswerButton : MonoBehaviour
         else
         {
             Debug.Log("Wrong answer");
-            PlayerController playerController = gameObject.GetComponent<PlayerController>();
-            playerController.TakeDamage(20);
+            PlayerHealth playerHealth = gameObject.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(20);
             
             questionSetup.ClosedCanvasAndDestroy();
 
