@@ -17,19 +17,14 @@ public class PlayerCoins : MonoBehaviour , IDataPersistence
 
     public void LoadData(GameData data)
     {
-        foreach (KeyValuePair<string, bool> pair in data.coinsCollected)
-        {
-            if(pair.Value)
-            {
-                Coin++;
-            }
-        }
+        Coin = data.playerCoins;
     }
 
 
     public void SaveData(ref GameData data) 
     { 
         // no data needs to be saved for this script
+        data.playerCoins = Coin;
     }
 
 

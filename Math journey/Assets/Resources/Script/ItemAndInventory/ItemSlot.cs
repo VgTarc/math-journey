@@ -197,6 +197,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
             // Add a collider
             itemToDrop.AddComponent<BoxCollider2D>();
+            itemToDrop.AddComponent<CircleCollider2D>();
+            itemToDrop.GetComponent<CircleCollider2D>().isTrigger = true;
+            itemToDrop.GetComponent<CircleCollider2D>().radius += 0.01f;
 
             // Set the location
             
