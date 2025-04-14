@@ -88,5 +88,14 @@ public class ItemSo : ScriptableObject
         Book
     }
 
+    public enum ItemType
+    {
+        none,
+        Book,
+        Potion
+    }
+
+    public ItemType itemType;
+
 
 }

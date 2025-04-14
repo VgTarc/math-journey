@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour , IDataPersistence
 {
 
     public GameObject inventoryMenu;
@@ -106,4 +106,69 @@ public class InventoryManager : MonoBehaviour
             itemSlot[i].thisItemSelected = false;
         }
     }
+
+    //============== SAVE AND LOAD ======================//
+    public void SaveData(ref GameData data)
+    {
+        data.inventoryItems.Clear();
+
+        foreach(var slot in itemSlot)
+        {
+            if (slot == null || slot.quantity <= 0) continue;
+            if (slot.itemSprite == null) continue;
+
+            Debug.Log("Sprite name = " + slot.itemSprite.name);
+
+            string spritePath = GetSpritePathByItemType(slot.itemName,slot.itemSprite.name);
+
+
+                InventoryItemData itemData = new InventoryItemData
+                {
+                    itemName = slot.itemName,
+                    quantity = slot.quantity,
+                    itemDescription = slot.itemDescription,
+                    spritePath = spritePath
+                };
+
+                data.inventoryItems.Add(itemData);
+            
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        foreach(var item in data.inventoryItems)
+        {
+            Sprite loadedSprite = Resources.Load<Sprite>(item.spritePath);
+           if(loadedSprite == null)
+            {
+                Debug.LogError("Sprite not found at path: " + item.spritePath);
+            }
+            AddItem(item.itemName, item.quantity, loadedSprite, item.itemDescription);
+        }
+    }
+
+    public string GetSpritePathByItemType(string itemName, string spriteName)
+    {
+        foreach(var itemSo in itemSOs)
+        {
+            if(itemSo.itemName == itemName)
+            {
+                switch(itemSo.itemType)
+                {
+                    case ItemSo.ItemType.Potion:
+                        return "InGameSprites/Potion/" + spriteName;
+                    case ItemSo.ItemType.Book:
+                        return "InGameSprites/Book/" + spriteName;
+                    default:
+                        return "InGameSprites/" + spriteName;
+                }
+            }
+        }
+
+        return "InGameSprites/" + spriteName;
+    }
+
+
+
 }
