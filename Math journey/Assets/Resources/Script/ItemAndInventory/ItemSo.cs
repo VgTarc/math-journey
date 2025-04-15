@@ -7,6 +7,7 @@ public class ItemSo : ScriptableObject
 {
     public string Name;
     public string itemName;
+    public int quantity;
     
     
     
@@ -36,6 +37,11 @@ public class ItemSo : ScriptableObject
             else
             {
                 playerHealth.RestoreHealth(amountToChangeStat);
+                quantity--;
+                if(quantity <= 0)
+                {
+                    quantity = 0;
+                }
                 return true;
             }
             

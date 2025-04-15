@@ -52,53 +52,63 @@ public class InventoryManager : MonoBehaviour , IDataPersistence
         return false;
     }
 
-
-
-
-
-
     public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
-        
+        // ✅ หา ItemSo ที่ตรงกับ itemName
+        ItemSo matchedSo = null;
+        foreach (var so in itemSOs)
+        {
+            if (so.itemName == itemName)
+            {
+                matchedSo = so;
+                break;
+            }
+        }
+
+        if (matchedSo == null)
+        {
+            Debug.LogError("ItemSO not found for item: " + itemName);
+            return quantity;
+        }
+
+        // ✅ เติมช่องที่มีของอยู่ก่อน
         for (int i = 0; i < itemSlot.Length; i++)
         {
             if (itemSlot[i].itemName == itemName && itemSlot[i].quantity < itemSlot[i].maxNumberOfItems)
             {
-                int leftoverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
-
-                if (leftoverItems > 0)
-                {
-                    quantity = leftoverItems;
-                }
+                int leftover = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription, matchedSo);
+                if (leftover > 0)
+                    quantity = leftover;
                 else
-                {
                     return 0;
-                }
             }
         }
 
-        
+        // ✅ เติมช่องว่าง
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (!itemSlot[i].isFull)
+            if (!itemSlot[i].isFull && string.IsNullOrEmpty(itemSlot[i].itemName))
             {
-                int leftoverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
-
-                if (leftoverItems > 0)
-                {
-                    quantity = leftoverItems;
-                }
+                int leftover = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription, matchedSo);
+                if (leftover > 0)
+                    quantity = leftover;
                 else
-                {
                     return 0;
-                }
             }
         }
 
         return quantity;
     }
 
-        public void DeselectAllSlots()
+
+
+
+
+
+
+
+
+    public void DeselectAllSlots()
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {

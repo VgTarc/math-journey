@@ -55,8 +55,17 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
 
-    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, ItemSo itemSo)
     {
+
+        this.itemSo = itemSo;
+        if (!string.IsNullOrEmpty(this.itemName) && this.itemName != itemName)
+        {
+            return quantity;
+        }
+
+
+
         // Check to see if the slot is already full
 
         if(isFull)
@@ -118,7 +127,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         if (thisItemSelected)
         {
-            bool usable = inventoryManager.UseItem(itemName);
+            if (itemSo == null) return;
+            bool usable = itemSo.UseItem();
             if (usable == true)
             {
                 if (itemSo.openCanva == ItemSo.OpenCanva.Book)
@@ -166,15 +176,24 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         quantityText.enabled = false;
         itemImage.sprite = emptySprite;
+
+        // ?? ?????????????????
         itemName = "";
         itemDescription = "";
         itemSprite = emptySprite;
+        itemSo = null; // ? ????????!
+        isFull = false;
 
+        thisItemSelected = false;
+        selectedShader.SetActive(false); // ????????????
+
+        // ???? UI ??? description ????
         ItemDescriptionNameText.text = "";
         ItemDescriptionText.text = "";
         itemDescriptionImage.sprite = emptySprite;
-        isFull = false;
     }
+
+
 
     public void OnRightClick()
     {

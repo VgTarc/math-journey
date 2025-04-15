@@ -39,6 +39,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void RestoreHealth(int amount)
     {
+        if (health + amount > maxHealth)
+        {
+            health= maxHealth;
+            return;
+        }
         health += amount;
         slider.value = health;
     }
