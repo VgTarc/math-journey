@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcDialogue : MonoBehaviour
+public class NpcDialogue : MonoBehaviour, IDataPersistence
 {
+
+    [SerializeField] private string npcID;
+    [SerializeField] private bool hasTalked = false;
+
     public AdvancedDialogueSO[] conversation;
 
     private Transform player;
@@ -11,7 +15,7 @@ public class NpcDialogue : MonoBehaviour
 
     private AdvancedDialogueManager advancedDialogueManager;
 
-    private bool dialogueInitiated;
+    private bool dialogueInitiated = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,8 @@ public class NpcDialogue : MonoBehaviour
         speechBubble = GetComponent<SpriteRenderer>();
         speechBubble.enabled = false;
         advancedDialogueManager = GameObject.Find("DialogueManager").GetComponent<AdvancedDialogueManager>();
+
+        advancedDialogueManager.OnDialogueEnd += HandleDialogueEnd;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -64,4 +70,47 @@ public class NpcDialogue : MonoBehaviour
         CurrentScale.x *= -1;
         transform.parent.localScale = CurrentScale;
     }
+
+    private void HandleDialogueEnd()
+    {
+        if (hasTalked) return;
+        else
+        {
+            hasTalked = true;
+            advancedDialogueManager.OnDialogueEnd -= HandleDialogueEnd;
+            gameObject.SetActive(false); // หรือ Destroy(gameObject);
+        }
+        
+        
+    }
+
+    [ContextMenu("generate NPC GUID")]
+    private void GenerateGuid()
+    {
+        npcID = System.Guid.NewGuid().ToString();
+    }
+
+
+    public void LoadData(GameData data)
+    {
+        data.npcTalked.TryGetValue(npcID, out hasTalked);
+        if (hasTalked)
+        {
+            gameObject.SetActive(false);
+        }
+
+
+    }
+
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.npcTalked.ContainsKey(npcID))
+        {
+            data.npcTalked.Remove(npcID);
+        }
+        data.npcTalked.Add(npcID, hasTalked);
+    }
+    
+
 }

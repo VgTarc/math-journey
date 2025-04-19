@@ -10,7 +10,7 @@ public class GameData
     public SerializableDictionary<string, bool> coinsCollected; // specific coin adn if it collected
     public int playerCoins;
     public List<InventoryItemData> inventoryItems;
-    
+    public SerializableDictionary<string, bool> npcTalked;
 
 
     public GameData()
@@ -19,6 +19,7 @@ public class GameData
         coinsCollected = new SerializableDictionary<string, bool>();
         playerCoins = 0;
         inventoryItems = new List<InventoryItemData>();
+        npcTalked = new SerializableDictionary<string, bool>();
     }
 }
 
