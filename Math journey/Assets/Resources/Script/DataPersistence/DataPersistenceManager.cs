@@ -12,6 +12,8 @@ public class DataPersistenceManager : MonoBehaviour
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
 
+    public GameManager gameManager;
+
 
     public static DataPersistenceManager Instance { get; private set; }
 
@@ -28,7 +30,19 @@ public class DataPersistenceManager : MonoBehaviour
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
+
+        if (dataHandler.FileExists())
+        {
+            gameManager.isLoadingFromSave = true;
+            LoadGame();
+        }
+        else
+        {
+            gameManager.isLoadingFromSave = false;
+            LoadGame();
+        }
+
+        
     }
     //=======================
     public void NewGame()

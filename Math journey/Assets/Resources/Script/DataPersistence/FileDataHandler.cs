@@ -71,4 +71,10 @@ public class FileDataHandler
             Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
     }
+
+    public bool FileExists()
+    {
+        string fullPath = Path.Combine(dataDirPath,dataFileName);
+        return File.Exists(fullPath);
+    }
 }

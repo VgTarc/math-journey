@@ -73,7 +73,7 @@ public class NpcDialogue : MonoBehaviour, IDataPersistence
 
     private void HandleDialogueEnd()
     {
-        if (hasTalked) return;
+        if (hasTalked || !advancedDialogueManager.WasDialogueFinished()) return;
         else
         {
             hasTalked = true;

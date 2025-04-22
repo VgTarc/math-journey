@@ -59,6 +59,9 @@ TagManager:
   - name: 4RockandBrush
     uniqueID: 3092808877
     locked: 0
+  - name: BackGround
+    uniqueID: 4196226361
+    locked: 0
   - name: Player
     uniqueID: 2215127311
     locked: 0
@@ -82,4 +85,10 @@ TagManager:
     locked: 0
   - name: Panel
     uniqueID: 1752136541
+    locked: 0
+  - name: ForeGround
+    uniqueID: 809634019
+    locked: 0
+  - name: Grass
+    uniqueID: 1198874651
     locked: 0

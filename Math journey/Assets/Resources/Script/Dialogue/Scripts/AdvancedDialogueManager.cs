@@ -45,6 +45,9 @@ public class AdvancedDialogueManager : MonoBehaviour
     //Player Freeze
     private PlayerMovement playerMove;
 
+    //
+    private bool dialogueFinished = false;
+
     
 
 
@@ -248,8 +251,9 @@ public class AdvancedDialogueManager : MonoBehaviour
 
     public void TurnOffDialogue()
     {
-
-
+        //when stepNum more than the actual dialogue (or equal) ... lol
+        dialogueFinished = (currentConversation != null && stepNum >= currentConversation.actors.Length);
+        
         stepNum = 0;
         dialogueActivated = false;
         dialogueCanvas.SetActive(false);
@@ -266,6 +270,11 @@ public class AdvancedDialogueManager : MonoBehaviour
 
         OnDialogueEnd?.Invoke();
 
+    }
+
+    public bool WasDialogueFinished()
+    {
+        return dialogueFinished;
     }
 
 

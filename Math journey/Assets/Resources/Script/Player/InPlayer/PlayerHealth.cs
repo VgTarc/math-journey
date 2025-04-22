@@ -4,7 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour , IDataPersistence
 {
 
     public int maxHealth = 100;
@@ -12,8 +12,15 @@ public class PlayerHealth : MonoBehaviour
     public Slider slider;
 
 
-    // Start is called before the first frame update
-    void Start()
+    //Start is called before the first frame update
+    //void Start()
+    //{
+    //    health = maxHealth;
+    //    slider.maxValue = maxHealth;
+    //    slider.value = health;
+    //}
+
+    public void InitializePlayer()
     {
         health = maxHealth;
         slider.maxValue = maxHealth;
@@ -48,7 +55,19 @@ public class PlayerHealth : MonoBehaviour
         slider.value = health;
     }
 
-    
+    public void LoadData(GameData data)
+    {
+        health = data.playerHealth;
+        slider.maxValue = maxHealth;
+        slider.value = health;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerHealth = health;
+    }
+
+
 
 }
    

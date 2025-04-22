@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [CreateAssetMenu]
 public class ItemSo : ScriptableObject
@@ -8,6 +9,9 @@ public class ItemSo : ScriptableObject
     public string Name;
     public string itemName;
     public int quantity;
+
+    public string BookName;
+    public string BookDescription;
     
     
     
@@ -20,7 +24,6 @@ public class ItemSo : ScriptableObject
 
 
     public OpenCanva openCanva = new OpenCanva();
-    public bool alreadyOpen;
 
    
 
@@ -51,19 +54,10 @@ public class ItemSo : ScriptableObject
         if (openCanva == OpenCanva.Book)
         {
 
-            OpenCanvas openCanvas = GameObject.Find(Name).GetComponent<OpenCanvas>();
+            BookCanvasManager bookCanvasManager = GameObject.Find("CanvasBook").GetComponent<BookCanvasManager>();
+            bookCanvasManager.ToggleCanvas(BookName, BookDescription);
+            return true;
 
-            if(alreadyOpen == false)
-            {
-                openCanvas.OpenCanva(alreadyOpen); // false
-                alreadyOpen = true;
-            }
-
-            else if(alreadyOpen == true)
-            {
-                openCanvas.OpenCanva(alreadyOpen); // true
-                alreadyOpen = false;
-            }
            
             
             
