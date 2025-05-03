@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcDialogue : MonoBehaviour, IDataPersistence
+public class NpcDialogue : MonoBehaviour, IDataPersistence , INPCDialogue
 {
 
     [SerializeField] private string npcID;
     [SerializeField] private bool hasTalked = false;
 
-    public AdvancedDialogueSO[] conversation;
+
+    [SerializeField] private AdvancedDialogueSO[] _conversation;
+    public AdvancedDialogueSO[] conversation => _conversation;
 
     private Transform player;
     private SpriteRenderer speechBubble;
@@ -16,6 +18,7 @@ public class NpcDialogue : MonoBehaviour, IDataPersistence
     private AdvancedDialogueManager advancedDialogueManager;
 
     private bool dialogueInitiated = false;
+    public bool isPlayerD = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +27,7 @@ public class NpcDialogue : MonoBehaviour, IDataPersistence
         speechBubble.enabled = false;
         advancedDialogueManager = GameObject.Find("DialogueManager").GetComponent<AdvancedDialogueManager>();
 
-        advancedDialogueManager.OnDialogueEnd += HandleDialogueEnd;
+        advancedDialogueManager.OnDialogueEnd += OnDialogueEnd;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -47,7 +50,7 @@ public class NpcDialogue : MonoBehaviour, IDataPersistence
                 Flip();
             }
 
-            advancedDialogueManager.InitiateDialogue(this);
+            advancedDialogueManager.InitiateDialogue(this, isPlayerD);
             dialogueInitiated = true;
 
         }
@@ -71,17 +74,13 @@ public class NpcDialogue : MonoBehaviour, IDataPersistence
         transform.parent.localScale = CurrentScale;
     }
 
-    private void HandleDialogueEnd()
+    public void OnDialogueEnd()
     {
-        if (hasTalked || !advancedDialogueManager.WasDialogueFinished()) return;
-        else
-        {
-            hasTalked = true;
-            advancedDialogueManager.OnDialogueEnd -= HandleDialogueEnd;
-            gameObject.SetActive(false); // หรือ Destroy(gameObject);
-        }
-        
-        
+        if (hasTalked) return;
+        hasTalked = true;
+        advancedDialogueManager.OnDialogueEnd -= OnDialogueEnd;
+        gameObject.SetActive(false); // หรือ Destroy(gameObject);
+    
     }
 
     [ContextMenu("generate NPC GUID")]

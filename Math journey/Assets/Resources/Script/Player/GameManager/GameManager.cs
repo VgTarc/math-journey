@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     public PlayerHealth playerHealth;
+    public SetPlayerPosition setPlayerPosition;
     public bool isLoadingFromSave = false;
 
     // Start is called before the first frame update
@@ -15,6 +16,10 @@ public class GameManager : MonoBehaviour
         {
             playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         }
+        if(setPlayerPosition == null)
+        {
+            setPlayerPosition = GameObject.FindWithTag("Player").GetComponent<SetPlayerPosition>();
+        }
 
         if(isLoadingFromSave)
         {
@@ -23,6 +28,8 @@ public class GameManager : MonoBehaviour
         else
         {
             playerHealth.InitializePlayer();
+            setPlayerPosition.SetPosition();
+
         }
     }
 

@@ -22,7 +22,7 @@ public class Interact : MonoBehaviour
     {
         if(isInRange)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if(Input.GetKeyDown(KeyCode.Return))
             {
                 
                 interactAction.Invoke(); // fire event

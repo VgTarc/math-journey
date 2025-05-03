@@ -5,14 +5,18 @@ using UnityEngine;
 public class MonsterHp : MonoBehaviour
 {
     public int monsterHp;
-    public PlayerHealth playerHealth;
-    public PlayerCoins playerCoins;
-    public GameObject gameObject1;
+    private PlayerHealth playerHealth;
+    private PlayerCoins playerCoins;
 
-    public GameObject fadeTextObject;
+    
+    
+
+    //public GameObject fadeTextObject; ยังไม่ทำ
  
 
     public int amount;
+    public GameObject[] itemDrops;
+    public GameObject[] randomDrops; 
 
     private void Start()
     {
@@ -35,14 +39,18 @@ public class MonsterHp : MonoBehaviour
 
     private void OnDeath()
     {
-        if(fadeTextObject != null)
-        {
-            FadeText fadeText = fadeTextObject.GetComponent<FadeText>();
-            if(fadeText != null )
-            {
-                StartCoroutine(fadeText.FadeInOut());
-            }
-        }
+        //if(fadeTextObject != null)
+        //{
+        //    FadeText fadeText = fadeTextObject.GetComponent<FadeText>();
+        //    if(fadeText != null )
+        //    {
+        //        StartCoroutine(fadeText.FadeInOut());
+        //    }
+        //}
+        // ยังไม่ทำ
+        ItemDrop();
+        RandomDrop();
+        
     }
 
 
@@ -55,5 +63,29 @@ public class MonsterHp : MonoBehaviour
            
             TakeDamage(monsterStomp.damage);
         }
+    }
+
+    private void ItemDrop()
+    {
+        if (itemDrops.Length == 0) return;
+        for (int i = 0; i < itemDrops.Length; i++)
+        {
+            float randomX = Random.Range(-1.5f, 1.5f);
+            float randomY = Random.Range(0.2f, 0.5f);
+            Vector3 randomOffset = new Vector3(randomX, randomY, 0);
+            Vector3 spawnPos = transform.position + randomOffset;
+            Instantiate(itemDrops[i], spawnPos, Quaternion.identity);
+        }
+    }
+    private void RandomDrop()
+    {
+        if (randomDrops.Length == 0) return;
+
+        Debug.Log("Test");
+
+        int randomIndex = Random.Range(0,randomDrops.Length);
+
+        GameObject selectedItem = randomDrops[randomIndex];
+        Instantiate(selectedItem, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
     }
 }

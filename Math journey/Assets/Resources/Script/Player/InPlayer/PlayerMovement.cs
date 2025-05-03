@@ -133,6 +133,7 @@ public class PlayerMovement : MonoBehaviour , IDataPersistence
 
     public void LoadData(GameData data)
     {
+        if (!DataPersistenceManager.Instance.gameManager.isLoadingFromSave) return;
         this.transform.position = data.playerPositon;
     }
 

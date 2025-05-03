@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class AdvancedDialogueManager : MonoBehaviour
 {
@@ -48,7 +49,13 @@ public class AdvancedDialogueManager : MonoBehaviour
     //
     private bool dialogueFinished = false;
 
-    
+
+    bool isPlayerDialogue;
+    bool startOnce = false;
+    private INPCDialogue currentDialogueOwner;
+
+
+
 
 
 
@@ -96,33 +103,90 @@ public class AdvancedDialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueActivated && Input.GetKeyDown(KeyCode.Return) && canContinueText)
+        if (startOnce == false)
         {
-            // ไม่ให้กด Enter ถ้ายังอยู่ใน Branch
-            if (currentConversation.actors != null &&
-                stepNum > 0 &&
-                currentConversation.actors[Mathf.Clamp(stepNum - 1, 0, currentConversation.actors.Length - 1)] == DialogueActors.Branch)
+            if (dialogueActivated && canContinueText)
             {
-                return;
-            }
 
-            HUDCanvas.SetActive(false);
-            playerMove.enabled = false;
+                // ไม่ให้กด Enter ถ้ายังอยู่ใน Branch
+                if (currentConversation.actors != null &&
+                    stepNum > 0 &&
+                    currentConversation.actors[Mathf.Clamp(stepNum - 1, 0, currentConversation.actors.Length - 1)] == DialogueActors.Branch)
+                {
+                    return;
+                }
 
-            if (currentConversation == null || currentConversation.actors == null || stepNum >= currentConversation.actors.Length)
-            {
-                TurnOffDialogue();
-            }
-            else
-            {
-                PlayDialogue();
+
+
+                if (currentConversation == null || currentConversation.actors == null || stepNum >= currentConversation.actors.Length)
+                {
+                    TurnOffDialogue();
+                }
+                else
+                {
+
+                    if (isPlayerDialogue)
+                    {
+                        HUDCanvas.SetActive(false);
+                        playerMove.enabled = false;
+                        PlayDialogue();
+                    }
+                    else if (!isPlayerDialogue)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            HUDCanvas.SetActive(false);
+                            playerMove.enabled = false;
+                            PlayDialogue();
+                        }
+                    }
+                    startOnce = true;
+
+
+                }
             }
         }
+        else if (startOnce == true)
+        {
+            if (dialogueActivated && Input.GetKeyDown(KeyCode.Return) && canContinueText)
+            {
+
+                // ไม่ให้กด Enter ถ้ายังอยู่ใน Branch
+                if (currentConversation.actors != null &&
+                    stepNum > 0 &&
+                    currentConversation.actors[Mathf.Clamp(stepNum - 1, 0, currentConversation.actors.Length - 1)] == DialogueActors.Branch)
+                {
+                    return;
+                }
+
+                HUDCanvas.SetActive(false);
+                playerMove.enabled = false;
+
+
+                if (currentConversation == null || currentConversation.actors == null || stepNum >= currentConversation.actors.Length)
+                {
+                    TurnOffDialogue();
+                }
+                else
+                {
+
+                    PlayDialogue();
+
+
+                }
+            }
+        }
+        
     }
 
 
     private void PlayDialogue()
     {
+        Animator playerAnimator = playerMove.GetComponent<Animator>();
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("Speed", 0f);
+        }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         // If it's a random NPC
@@ -236,15 +300,20 @@ public class AdvancedDialogueManager : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
         canContinueText = true;
+
     }
 
-    public void InitiateDialogue(NpcDialogue npcDialogue)
+    public void InitiateDialogue(INPCDialogue npcDialogue, bool isPlayerD)
     {
         if (dialogueActivated) return;
         // read the array of converation we are currently stepping through
         currentConversation = npcDialogue.conversation[0];
+        currentDialogueOwner = npcDialogue;
         dialogueActivated = true;
+
+        isPlayerDialogue = isPlayerD;
         
+
     }
 
     public event System.Action OnDialogueEnd;
@@ -268,7 +337,13 @@ public class AdvancedDialogueManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        OnDialogueEnd?.Invoke();
+
+        if (currentDialogueOwner != null && dialogueFinished)
+        {
+            currentDialogueOwner.OnDialogueEnd();
+            currentDialogueOwner = null;
+        }
+    
 
     }
 

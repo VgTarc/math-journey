@@ -12,6 +12,7 @@ public class GameData
     public List<InventoryItemData> inventoryItems;
     public SerializableDictionary<string, bool> npcTalked;
     public int playerHealth;
+    public SerializableDictionary<string, bool> playerTalked;
 
 
     public GameData()
@@ -21,6 +22,7 @@ public class GameData
         playerCoins = 0;
         inventoryItems = new List<InventoryItemData>();
         npcTalked = new SerializableDictionary<string, bool>();
+        playerTalked = new SerializableDictionary<string, bool>();
         playerHealth = 100;
     }
 }

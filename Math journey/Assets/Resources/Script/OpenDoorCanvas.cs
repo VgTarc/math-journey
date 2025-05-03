@@ -12,7 +12,6 @@ public class OpenDoorCanvas : MonoBehaviour
     public string questionName;
     public int questionsList;
 
-
     
 
     public void OpenCanva()

@@ -8,7 +8,7 @@ public class BookCanvasManager : MonoBehaviour
     public GameObject canvasObject;
     public TMP_Text bookText;
     public TMP_Text titleText;
-    public void ToggleCanvas(string text, string title)
+    public void ToggleCanvas(string title, string text)
     {
         if(canvasObject.activeSelf)
         {

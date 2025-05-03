@@ -60,6 +60,7 @@ public class DataPersistenceManager : MonoBehaviour
         {
             Debug.Log("No data was found. initilizing data to defaults.");
             NewGame();
+            
         }
 
         // to-do // push the loaded data to all other script that need it // คือส่งข้อมูลที่เก็บไปให้อันอื่นแหละ เหมือนส่งค่าพลังชีวิตเงี้ย

@@ -12,11 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207a5d6a18d75040a872b7a4d7e54a6, type: 3}
   m_Name: Book1
   m_EditorClassIdentifier: 
-  Name: BookCanvas
-  itemName: Book1
+  Name: Tutorial
+  itemName: Tutorial
   quantity: 0
-  BookName: Union 1
-  BookDescription: This is Book1 vro lol
+  BookName: Tutorial
+  BookDescription: 'A,D to walk
+
+    SpaceBar to Jump
+
+    Enter/Return to Interact
+    with object
+
+    Have Fun
+
+    (AJC12)'
   statToChange: 0
   amountToChangeStat: 0
   attributeToChange: 0

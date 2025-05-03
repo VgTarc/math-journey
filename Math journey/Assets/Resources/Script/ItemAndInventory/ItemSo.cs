@@ -10,7 +10,9 @@ public class ItemSo : ScriptableObject
     public string itemName;
     public int quantity;
 
+
     public string BookName;
+    [TextArea]
     public string BookDescription;
     
     
