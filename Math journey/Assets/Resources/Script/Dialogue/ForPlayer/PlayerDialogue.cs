@@ -65,7 +65,7 @@ public class PlayerDialogue : MonoBehaviour , IDataPersistence ,  INPCDialogue
 
 
 
-public void LoadData(GameData data)
+    public void LoadData(GameData data)
     {
         data.playerTalked.TryGetValue(convoID, out hasTalked);
         if (hasTalked)

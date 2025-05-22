@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 
 public class QuestionSetup : MonoBehaviour
 {
@@ -23,7 +22,8 @@ public class QuestionSetup : MonoBehaviour
 
     public GameObject canvas;
 
-    public GameObject objectToDestroy;
+
+    
 
     public void Awake()
     {
@@ -31,14 +31,9 @@ public class QuestionSetup : MonoBehaviour
         GetQuestionAssets();
     }
 
-    public void ClosedCanvasAndDestroy()
+    public void ClosedCanvas()
     {
-        if(questions.Count <= 0)
-        {
-            canvas.SetActive(false);
-            Destroy(objectToDestroy);
-
-        }
+        canvas.SetActive(false);
     }
 
     
@@ -148,6 +143,29 @@ public class QuestionSetup : MonoBehaviour
 
 
         return newList;
+    }
+
+    public void RemoveCurrentQuestion()
+    {
+        if (currentQuestion != null && questions.Contains(currentQuestion))
+        {
+            questions.Remove(currentQuestion);
+        }
+
+        if (questions.Count <= 0)
+        {
+            canvas.SetActive(false);
+            ClosedCanvas();
+        }
+
+    }
+
+    public void AddBackCurrentQuestion()
+    {
+        if(currentQuestion != null)
+        {
+            questions.Add(currentQuestion);
+        }
     }
 
 }

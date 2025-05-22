@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CSE_CameraZoom : CutsceneElementBase
+public class CSE_CameraZoom : CutsceneElementBase , IDataPersistence
 {
     [SerializeField] private float targetFOV;
     [SerializeField] Transform target;
@@ -11,13 +11,40 @@ public class CSE_CameraZoom : CutsceneElementBase
 
     private CinemachineVirtualCamera vCam;
     private Transform playerTransform;
-    public GameObject obj;
+    //public GameObject obj;
+
+    //Player Freeze
+    private PlayerMovement playerMove;
+
+    //Save- load
+    public string csID;
+    public bool hasTrigger;
+
+    [ContextMenu("generate CS GUID")]
+    private void GenerateGuid()
+    {
+        csID = System.Guid.NewGuid().ToString();
+    }
+
+
+
 
     public override void Execute()
     {
+
+        //Find player movement script
+        playerMove = GameObject.Find("Player").GetComponent<PlayerMovement>();
         vCam = cutsceneHandler.vCam;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // ค้นหาตัวผู้เล่น
         vCam.Follow = null;
+        Animator playerAnimator = playerMove.GetComponent<Animator>();
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("Speed", 0f);
+        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        playerMove.enabled = false;
         StartCoroutine(ZoomCamera());
     }
 
@@ -47,7 +74,11 @@ public class CSE_CameraZoom : CutsceneElementBase
 
         vCam.Follow = playerTransform;
         vCam.m_Lens.OrthographicSize = OriginalSize;
-        Destroy(obj);
+        playerMove.enabled = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        hasTrigger = true;
+        gameObject.SetActive(false);
 
         cutsceneHandler.PlayNextElement();
     }
@@ -56,4 +87,26 @@ public class CSE_CameraZoom : CutsceneElementBase
     {
         StopAllCoroutines();
     }
+
+    public void LoadData(GameData data)
+    {
+        data.csTrigger.TryGetValue(csID, out hasTrigger);
+        if (hasTrigger)
+        {
+            gameObject.SetActive(false);
+        }
+
+
+    }
+
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.csTrigger.ContainsKey(csID))
+        {
+            data.csTrigger.Remove(csID);
+        }
+        data.csTrigger.Add(csID, hasTrigger);
+    }
+
 }

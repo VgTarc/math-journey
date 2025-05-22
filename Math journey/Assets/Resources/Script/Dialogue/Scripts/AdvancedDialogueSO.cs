@@ -24,4 +24,8 @@ public class AdvancedDialogueSO : ScriptableObject
     public AdvancedDialogueSO option2;
     public AdvancedDialogueSO option3;
 
+    [Header("Drop Settings")]
+    public bool dropItems = false;
+    public GameObject[] itemDrops;
+
 }

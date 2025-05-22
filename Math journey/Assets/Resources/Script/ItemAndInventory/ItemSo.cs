@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 [CreateAssetMenu]
 public class ItemSo : ScriptableObject
@@ -10,13 +11,19 @@ public class ItemSo : ScriptableObject
     public string itemName;
     public int quantity;
 
-
-    public string BookName;
     [TextArea]
+    public string BookName;
+    [TextArea(15,20)]
     public string BookDescription;
-    
-    
-    
+    public List<Sprite> bookImages = new List<Sprite> ();
+
+    public int upgradeStompDamage;
+
+    //Get Component naja
+    private MonsterStomp monsterStomp;
+
+
+
 
     public StatToChange statToChange = new StatToChange();
     public int amountToChangeStat;
@@ -26,6 +33,7 @@ public class ItemSo : ScriptableObject
 
 
     public OpenCanva openCanva = new OpenCanva();
+    public PlayerUpgrade upgrade = new PlayerUpgrade();
 
    
 
@@ -57,12 +65,28 @@ public class ItemSo : ScriptableObject
         {
 
             BookCanvasManager bookCanvasManager = GameObject.Find("CanvasBook").GetComponent<BookCanvasManager>();
-            bookCanvasManager.ToggleCanvas(BookName, BookDescription);
-            return true;
 
-           
-            
-            
+            if (bookImages.Count == 0)
+            {
+                bookCanvasManager.ToggleCanvas(BookName, BookDescription, null, null);
+                return true;
+            }
+            if (bookImages.Count == 1)
+            {
+                bookCanvasManager.ToggleCanvas(BookName, BookDescription, bookImages[0], null);
+                return true;
+            }
+
+            bookCanvasManager.ToggleCanvas(BookName, BookDescription, bookImages[0], bookImages[1]);
+            return true;
+  
+        }
+
+        if(upgrade == PlayerUpgrade.StompDamage)
+        {
+            monsterStomp = GameObject.Find("FeetPosition").GetComponent<MonsterStomp>();
+            monsterStomp.damage += upgradeStompDamage;
+            return true;
         }
 
 
@@ -95,6 +119,13 @@ public class ItemSo : ScriptableObject
         none,
         Book,
         Potion
+    }
+
+    public enum PlayerUpgrade
+    {
+        none,
+        Speed,
+        StompDamage
     }
 
     public ItemType itemType;

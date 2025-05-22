@@ -64,8 +64,6 @@ public class AdvancedDialogueManager : MonoBehaviour
     void Start()
     {
 
-    
-
         HUDCanvas = GameObject.Find("CanvasGameSystem");
 
         //Find player movement script
@@ -171,6 +169,7 @@ public class AdvancedDialogueManager : MonoBehaviour
                 {
 
                     PlayDialogue();
+                    
 
 
                 }
@@ -340,9 +339,13 @@ public class AdvancedDialogueManager : MonoBehaviour
 
         if (currentDialogueOwner != null && dialogueFinished)
         {
+            if(currentConversation.dropItems)
+                DropItemsFromDialogue();
             currentDialogueOwner.OnDialogueEnd();
             currentDialogueOwner = null;
         }
+
+        startOnce = false;
     
 
     }
@@ -352,16 +355,37 @@ public class AdvancedDialogueManager : MonoBehaviour
         return dialogueFinished;
     }
 
+    private void DropItemsFromDialogue()
+    {
+        if (currentConversation == null) return;
 
+        if (currentConversation.itemDrops.Length == 0) return;
 
-
+        for (int i = 0; i < currentConversation.itemDrops.Length; i++)
+        {
+                float randomX = Random.Range(-1.5f, 1.5f);
+                float randomY = Random.Range(0.2f, 0.5f);
+                Vector3 randomOffset = new Vector3(randomX, randomY, 0);
+                Vector3 spawnPos = playerMove.transform.position + randomOffset;
+                Instantiate(currentConversation.itemDrops[i], spawnPos, Quaternion.identity);
+        }
+    }
 }
+
+
+
+
+
+
+
+
 
 
 public enum DialogueActors
 {
     Player,
     John,
+    Alex,
     Random,
     Branch
 };

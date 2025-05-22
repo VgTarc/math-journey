@@ -16,8 +16,17 @@ public class AnswerButton : MonoBehaviour
     
 
     public string GoName; // game object name
-    
+    private OpenDoorCanvas openDoorCanvas;
+    public GameObject Door;
+    private FadeAndHide fadeAndHide;
 
+    private void Start()
+    {
+        if(openDoorCanvas == null)
+            openDoorCanvas = Door.GetComponent<OpenDoorCanvas>();
+        if(fadeAndHide == null)
+            fadeAndHide = Door.GetComponent<FadeAndHide>();
+    }
 
 
     public void SetAnswerText(string newText)
@@ -42,7 +51,7 @@ public class AnswerButton : MonoBehaviour
         {
             Debug.Log("Correct answer");
             
-            questionSetup.ClosedCanvasAndDestroy();
+            questionSetup.RemoveCurrentQuestion();
         }
         else
         {
@@ -50,13 +59,34 @@ public class AnswerButton : MonoBehaviour
             PlayerHealth playerHealth = gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(20);
             
-            questionSetup.ClosedCanvasAndDestroy();
+            questionSetup.AddBackCurrentQuestion();
 
         }
 
-        
+        if (questionSetup.questions.Count <= 0)
+        {
+            if (openDoorCanvas != null)
+            {
+                openDoorCanvas.hasDestroy = true;  
+                fadeAndHide.StartFadeOut();
+                //StartCoroutine(DelayedDeactivate(2f));
+                openDoorCanvas.gameObject.SetActive(false);
+                
+            }
+            
+        }
+
         questionSetup.Start();
+
+
+
+            
         
     }
+
+    //private IEnumerator DelayedDeactivate(float delay)
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //}
 
 }

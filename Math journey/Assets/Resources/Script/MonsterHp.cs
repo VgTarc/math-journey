@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterHp : MonoBehaviour
+public class MonsterHp : MonoBehaviour , IDataPersistence
 {
     public int monsterHp;
     private PlayerHealth playerHealth;
     private PlayerCoins playerCoins;
 
-    
+
+    [SerializeField] public string MonsterID;
+    [SerializeField] public bool hasDefeated = false;
+
     
 
+
+    [ContextMenu("generate Monster GUID")]
+    private void GenerateGuid()
+    {
+        MonsterID = System.Guid.NewGuid().ToString();
+    }
+
+
+
     //public GameObject fadeTextObject; ยังไม่ทำ
- 
+
 
     public int amount;
     public GameObject[] itemDrops;
@@ -71,7 +83,7 @@ public class MonsterHp : MonoBehaviour
         for (int i = 0; i < itemDrops.Length; i++)
         {
             float randomX = Random.Range(-1.5f, 1.5f);
-            float randomY = Random.Range(0.2f, 0.5f);
+            float randomY = Random.Range(0.1f, 0.3f);
             Vector3 randomOffset = new Vector3(randomX, randomY, 0);
             Vector3 spawnPos = transform.position + randomOffset;
             Instantiate(itemDrops[i], spawnPos, Quaternion.identity);
@@ -86,6 +98,28 @@ public class MonsterHp : MonoBehaviour
         int randomIndex = Random.Range(0,randomDrops.Length);
 
         GameObject selectedItem = randomDrops[randomIndex];
-        Instantiate(selectedItem, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        Instantiate(selectedItem, transform.position + new Vector3(0, 0.3f, 0), Quaternion.identity);
+    }
+
+
+    public void LoadData(GameData data)
+    {
+        data.Monster.TryGetValue(MonsterID, out hasDefeated);
+        if (hasDefeated)
+        {
+            gameObject.SetActive(false);
+        }
+
+
+    }
+
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.Monster.ContainsKey(MonsterID))
+        {
+            data.Monster.Remove(MonsterID);
+        }
+        data.Monster.Add(MonsterID, hasDefeated);
     }
 }

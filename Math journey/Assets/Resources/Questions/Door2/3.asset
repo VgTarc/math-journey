@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e026931c066fb94fadefef80342ab8d, type: 3}
+  m_Name: 3
+  m_EditorClassIdentifier: 
+  question: "\u0E02\u0E49\u0E2D\u0E04\u0E27\u0E32\u0E21\u0E15\u0E48\u0E2D\u0E44\u0E1B\u0E19\u0E35\u0E49\u0E16\u0E39\u0E01\u0E01\u0E35\u0E48\u0E02\u0E49\u0E2D\r\n\u0E01.
+    A= {6,12,21} \u0E41\u0E25\u0E30 B= {21,21,12,6} \u0E08\u0E30\u0E40\u0E2B\u0E47\u0E19\u0E27\u0E48\u0E32
+    A\u2260B\r\n\u0E02. C= {a,b,b,z} \u0E41\u0E25\u0E30 D = {a,b,z} \u0E08\u0E30\u0E40\u0E2B\u0E47\u0E19\u0E27\u0E48\u0E32
+    C\u2260D\r\n\u0E04. E = {n,f,s} \u0E41\u0E25\u0E30 W = {f,s,n,k} \u0E08\u0E30\u0E40\u0E2B\u0E47\u0E19\u0E27\u0E48\u0E32
+    E\u2284W\r\n\u0E07. Y=V \u0E01\u0E47\u0E15\u0E48\u0E2D\u0E40\u0E21\u0E37\u0E48\u0E2D
+    Y\u2282V \u0E41\u0E25\u0E30 V\u2282Y"
+  answers:
+  - "1 \u0E02\u0E49\u0E2D"
+  - "2 \u0E02\u0E49\u0E2D"
+  - "3 \u0E02\u0E49\u0E2D"
+  - "4 \u0E02\u0E49\u0E2D"

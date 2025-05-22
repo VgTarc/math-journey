@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class MonsterStomp : MonoBehaviour
+public class MonsterStomp : MonoBehaviour , IDataPersistence
 {
     //public PlayerController playerController;
     public int damage;
@@ -32,5 +32,14 @@ public class MonsterStomp : MonoBehaviour
 
 
         }
+    }
+    public void LoadData(GameData data)
+    {
+        damage = data.stompDamage;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.stompDamage = damage;
     }
 }
