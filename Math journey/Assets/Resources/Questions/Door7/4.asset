@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e026931c066fb94fadefef80342ab8d, type: 3}
+  m_Name: 4
+  m_EditorClassIdentifier: 
+  question: "\u0E01\u0E33\u0E2B\u0E19\u0E14\u0E43\u0E2B\u0E49 U = {5,6,7,8,9}\r\nA
+    = {6,5}\r\nB = {9,7,8}\r\n\u0E08\u0E07\u0E2B\u0E32 A'\u0E41\u0E25\u0E30 B'"
+  answers:
+  - "A' = {7,8,9} \u0E41\u0E25\u0E30 B'= {5,6}"
+  - "A' = {6,5} \u0E41\u0E25\u0E30 B' = {9,7,8}"
+  - "A' = {9,6,5} \u0E41\u0E25\u0E30 B' = {9,7,8}"
+  - "A' = {7,6} \u0E41\u0E25\u0E30 B' = {5,6,7}"
+  image: {fileID: 0}

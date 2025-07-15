@@ -19,11 +19,23 @@ public class GameData
     public SerializableDictionary<string, bool> itemCollected;
     public List<WorldItemData> worldItems;
     public SerializableDictionary<string, bool> Monster;
+    public SerializableDictionary<string, bool> scenesInitialized;
+    public string currentSceneName;
+    public SerializableDictionary<string, string> changedPictureSprites;
+    public SerializableDictionary<string, bool> chestInteract;
+    public bool initiate;
+
+    // for checkpoint
+    public float x;
+    public float y;
+    public float z;
+    //--------
+
 
 
     public GameData()
     {
-        playerPositon = Vector3.zero;
+        playerPositon = new Vector3(-7,0,0);
         coinsCollected = new SerializableDictionary<string, bool>();
         playerCoins = 0;
         stompDamage = 5;
@@ -36,6 +48,16 @@ public class GameData
         itemCollected = new SerializableDictionary<string, bool>();
         worldItems = new List<WorldItemData>();
         Monster = new SerializableDictionary<string, bool>();
+        
+        currentSceneName = "";
+        changedPictureSprites = new SerializableDictionary<string, string>();
+        chestInteract = new SerializableDictionary<string, bool>();
+        x = 0f;
+        y = 0f;
+        z = 0f;
+        
+
+
 
     }
 }

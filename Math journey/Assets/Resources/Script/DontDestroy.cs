@@ -1,27 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Dont : MonoBehaviour
+public class DestroyDuplicateSingleton : MonoBehaviour
 {
-    private static GameObject[] persistentObjects = new GameObject[3];
-    public int objectIndex;
+    [Tooltip("ถ้าเช็คด้วย Tag ให้ตั้งค่า tag ให้เหมือนกันทั้งหมด และเลือก Enable เช็คด้วย Tag")]
+    public bool checkByTag = false;
 
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
-        if (persistentObjects[objectIndex] == null) // if there's no same object then don't destroy
+        if (checkByTag)
         {
-            persistentObjects[objectIndex] = gameObject;
-            DontDestroyOnLoad(gameObject);
+            var duplicates = GameObject.FindGameObjectsWithTag(gameObject.tag);
+            foreach (var obj in duplicates)
+            {
+                if (obj != this.gameObject)
+                {
+                    Debug.Log($"[Singleton] Duplicate tag '{gameObject.tag}' found. Destroying the new one.");
+                    Destroy(this.gameObject);
+                    return;
+                }
+            }
         }
-        else if (persistentObjects[objectIndex] != gameObject)
+        else
         {
-            Destroy(gameObject);
+            var allObjects = GameObject.FindObjectsOfType<GameObject>();
+            foreach (var obj in allObjects)
+            {
+                if (obj != this.gameObject && obj.name == this.gameObject.name)
+                {
+                    Debug.Log($"[Singleton] Duplicate '{gameObject.name}' found. Destroying the new one.");
+                    Destroy(this.gameObject);
+                    return;
+                }
+            }
         }
 
-        
+        DontDestroyOnLoad(gameObject);
     }
-
-    
 }

@@ -44,7 +44,7 @@ public class MonsterHp : MonoBehaviour , IDataPersistence
         {
             playerCoins.GetCoin(amount);
             OnDeath();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             
         }
     }
@@ -62,7 +62,7 @@ public class MonsterHp : MonoBehaviour , IDataPersistence
         // ยังไม่ทำ
         ItemDrop();
         RandomDrop();
-        
+        hasDefeated = true;
     }
 
 

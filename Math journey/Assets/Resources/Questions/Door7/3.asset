@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e026931c066fb94fadefef80342ab8d, type: 3}
+  m_Name: 3
+  m_EditorClassIdentifier: 
+  question: "\u0E01\u0E33\u0E2B\u0E19\u0E14\u0E43\u0E2B\u0E49 U = {c,a,p,t,i,a,n}\r\nA
+    = {a,p,t}\r\nB = {i,b,a}\r\nC = {c,t,\u0430}\r\n\u0E08\u0E07\u0E2B\u0E32 ((A-B)\u2229C))'
+    \u0E40\u0E17\u0E48\u0E32\u0E01\u0E31\u0E1A\u0E02\u0E49\u0E2D\u0E43\u0E14"
+  answers:
+  - '{c,a,p,i,a,n}'
+  - '{p,t}'
+  - '{a,p,t}'
+  - '{c,a,p,t,a,n}'
+  image: {fileID: 0}

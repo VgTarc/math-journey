@@ -122,6 +122,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    
 
     public void OnLeftClick()
     {
@@ -172,7 +173,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         
     }
 
-    private void EmptySlot()
+    public void EmptySlot()
     {
         quantityText.enabled = false;
         itemImage.sprite = emptySprite;

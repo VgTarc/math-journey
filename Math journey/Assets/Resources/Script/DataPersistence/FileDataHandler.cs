@@ -77,4 +77,14 @@ public class FileDataHandler
         string fullPath = Path.Combine(dataDirPath,dataFileName);
         return File.Exists(fullPath);
     }
+
+    public void Delete()
+    {
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+            Debug.Log("Deleted save file at: " + fullPath);
+        }
+    }
 }

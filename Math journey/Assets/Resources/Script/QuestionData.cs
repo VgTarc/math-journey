@@ -9,6 +9,8 @@ public class QuestionData : ScriptableObject
     public string question;
     [Tooltip("The correct answer should always be listed first.")]
     public string[] answers;
-    
+    [Tooltip("Optional image to show with the question.")]
+    public Sprite image;
+
 }
 

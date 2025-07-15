@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Coin
   - OptionButton
+  - GameOver
   layers:
   - Default
   - TransparentFX

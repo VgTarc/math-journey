@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -33,7 +34,10 @@ public class PlayerMovement : MonoBehaviour , IDataPersistence
     public Transform groundCheck;
     public LayerMask groundLayer;
 
-    void Start()
+
+   
+
+    void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>(); // get therigidbody2D to use
         animator = GetComponent<Animator>(); // get the Animator to use
@@ -133,12 +137,15 @@ public class PlayerMovement : MonoBehaviour , IDataPersistence
 
     public void LoadData(GameData data)
     {
-        if (!DataPersistenceManager.Instance.gameManager.isLoadingFromSave) return;
+        Debug.Log(">> LoadData CALLED for Player!");
         this.transform.position = data.playerPositon;
+
     }
+
 
     public void SaveData(ref GameData data)
     {
+        Debug.Log("Player saving data");
         data.playerPositon = this.transform.position;
     }
 

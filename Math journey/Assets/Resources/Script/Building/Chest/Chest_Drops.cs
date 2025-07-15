@@ -2,10 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : MonoBehaviour
+public class Chest : MonoBehaviour, IDataPersistence
 {
     public GameObject[] itemDrops;
     public GameObject[] randomDrops;
+
+
+    [SerializeField] public string chestID;
+    [SerializeField] public bool hasInteract = false;
+
+
+
+    [ContextMenu("generate Chest GUID")]
+    private void GenerateGuid()
+    {
+        chestID = System.Guid.NewGuid().ToString();
+    }
+
 
     public void ItemDrop()
     {
@@ -20,6 +33,10 @@ public class Chest : MonoBehaviour
             Vector3 spawnPos = basePos + offset;
             Instantiate(itemDrops[i], spawnPos, Quaternion.identity);
         }
+
+        hasInteract = true;
+
+
     }
 
     public void RandomDrop()
@@ -33,4 +50,26 @@ public class Chest : MonoBehaviour
         Instantiate(selectedItem, spawnPos, Quaternion.identity);
     }
 
+
+
+    public void LoadData(GameData data)
+    {
+        data.chestInteract.TryGetValue(chestID, out hasInteract);
+        if (hasInteract)
+        {
+            gameObject.SetActive(false);
+        }
+
+
+    }
+
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.chestInteract.ContainsKey(chestID))
+        {
+            data.chestInteract.Remove(chestID);
+        }
+        data.chestInteract.Add(chestID, hasInteract);
+    }
 }

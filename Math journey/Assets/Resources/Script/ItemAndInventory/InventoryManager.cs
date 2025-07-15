@@ -13,10 +13,13 @@ public class InventoryManager : MonoBehaviour , IDataPersistence
 
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //void Start()
+    //{
+    //    foreach (var itemSo in itemSOs)
+    //    {
+    //        Debug.Log("ItemSo: " + itemSo.itemName);
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -147,13 +150,21 @@ public class InventoryManager : MonoBehaviour , IDataPersistence
 
     public void LoadData(GameData data)
     {
-        foreach(var item in data.inventoryItems)
+
+        Debug.Log("Loading Inventory Data");
+
+        foreach (var slot in itemSlot)
+        {
+            slot.EmptySlot(); // ถ้ามีฟังก์ชันนี้ใน ItemSlot ให้เรียกใช้เพื่อล้างข้อมูล
+        }
+
+        foreach (var item in data.inventoryItems)
         {
             Sprite loadedSprite = Resources.Load<Sprite>(item.spritePath);
            if(loadedSprite == null)
-            {
+           {
                 Debug.LogError("Sprite not found at path: " + item.spritePath);
-            }
+           }
             AddItem(item.itemName, item.quantity, loadedSprite, item.itemDescription);
         }
     }

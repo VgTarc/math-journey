@@ -59,6 +59,9 @@ public class Item : MonoBehaviour , IDataPersistence
 
     public void LoadData(GameData data)
     {
+        if (this == null || gameObject == null)
+            return;
+
         data.itemCollected.TryGetValue(itemID, out hasCollected);
         if (hasCollected)
         {
@@ -79,7 +82,9 @@ public class Item : MonoBehaviour , IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        
+        if (this == null || gameObject == null)
+            return;
+
 
         WorldItemData itemData = new WorldItemData
         {

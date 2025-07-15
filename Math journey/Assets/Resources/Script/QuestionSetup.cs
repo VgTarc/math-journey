@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class QuestionSetup : MonoBehaviour
 {
@@ -22,8 +23,10 @@ public class QuestionSetup : MonoBehaviour
 
     public GameObject canvas;
 
+    [SerializeField] private Image questionImage;
 
-    
+
+
 
     public void Awake()
     {
@@ -87,6 +90,17 @@ public class QuestionSetup : MonoBehaviour
     {
         // Set the question text
         questionText.text = currentQuestion.question;
+
+        // Check if image exists
+        if (currentQuestion.image != null)
+        {
+            questionImage.sprite = currentQuestion.image;
+            questionImage.gameObject.SetActive(true); // โชว์รูป
+        }
+        else
+        {
+            questionImage.gameObject.SetActive(false); // ซ่อนถ้าไม่มี
+        }
 
     }
 
@@ -167,5 +181,10 @@ public class QuestionSetup : MonoBehaviour
             questions.Add(currentQuestion);
         }
     }
+
+
+
+
+
 
 }
