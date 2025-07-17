@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour , IDataPersistence
@@ -11,7 +12,11 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
     public int health;
     public Slider slider;
 
+    PlayerMovement playerMovement;
+    PlayerCoins playerCoins;
     Rigidbody2D rb;
+    public GameObject canvasObjRes;
+    public GameObject canvasObjDead;
 
 
     //Start is called before the first frame update
@@ -25,6 +30,8 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerCoins = GetComponent<PlayerCoins>();
         if (slider == null)
         {
             slider = FindObjectOfType<Slider>();
@@ -61,8 +68,8 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
             slider.value = health;
         if (health <= 0)
         {
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            StartCoroutine(RespawnPlayer());
+            playerMovement.enabled = false;
+            RespawnPlayer();
         }
     }
 
@@ -79,18 +86,51 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
 
     
 
-    public IEnumerator RespawnPlayer()
+    public void RespawnPlayer()
     {
-        GameObject canvasObj = GameObject.Find("GameOverCanvas");
-        canvasObj.SetActive(true);
-        yield return new WaitForSeconds(2f); // รอ 2 วินาที
+        if(playerCoins.Coin >= 5)
+        {
+            StartCoroutine(ReturnGameCoroutine());
+        }
+        else
+        {
+            StartCoroutine(ResetGameCoroutine());
+        }
+
+        
+    }
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2.5f);
+    }
+
+    private IEnumerator ResetGameCoroutine()
+    {
+        canvasObjDead.SetActive(true);
+
+        yield return new WaitForSeconds(5f); // แสดงหน้าตาย
+        DataPersistenceManager.Instance.DeleteSaveData();
+        SceneManager.LoadScene("Main_Menu");
+
+        canvasObjDead.SetActive(false);
+    }
+
+    private IEnumerator ReturnGameCoroutine()
+    {
+        canvasObjRes.SetActive(true);
+        playerCoins.Coin -= 5; // Deduct 5 coins for respawn
+        yield return new WaitForSeconds(2.5f); // รอ 2 วินาที
         float x = PlayerPrefs.GetFloat("CheckpointX");
         float y = PlayerPrefs.GetFloat("CheckpointY");
         float z = PlayerPrefs.GetFloat("CheckpointZ");
         transform.position = new Vector3(x, y, z);
-        yield return new WaitForSeconds(2f);
-        canvasObj.SetActive(false);
+        yield return new WaitForSeconds(2.5f);
+        canvasObjRes.SetActive(false);
+        playerMovement.enabled = true;
+        health = maxHealth / 2;
     }
+
 
 
     public void LoadData(GameData data)
