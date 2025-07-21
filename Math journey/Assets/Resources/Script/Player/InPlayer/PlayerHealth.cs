@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
     public GameObject canvasObjRes;
     public GameObject canvasObjDead;
 
+    private bool isRespawning = false;
 
     //Start is called before the first frame update
     //void Start()
@@ -88,7 +89,10 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
 
     public void RespawnPlayer()
     {
-        if(playerCoins.Coin >= 5)
+        if (isRespawning) return;
+        isRespawning = true;
+
+        if (playerCoins.Coin >= 5)
         {
             StartCoroutine(ReturnGameCoroutine());
         }
@@ -114,6 +118,7 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
         SceneManager.LoadScene("Main_Menu");
 
         canvasObjDead.SetActive(false);
+        isRespawning = false;
     }
 
     private IEnumerator ReturnGameCoroutine()
@@ -129,6 +134,7 @@ public class PlayerHealth : MonoBehaviour , IDataPersistence
         canvasObjRes.SetActive(false);
         playerMovement.enabled = true;
         health = maxHealth / 2;
+        isRespawning = false;
     }
 
 
